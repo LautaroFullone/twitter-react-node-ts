@@ -37,10 +37,10 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
             alt="Avatar"
             onClick={onClick}
             src={user?.profileImage || '/images/user-placeholder.jpg'}
-            style={{
-               objectFit: 'cover',
-               borderRadius: '100%',
+            onError={(e) => {
+               e.currentTarget.src = '/images/user-placeholder.jpg'
             }}
+            className="object-cover rounded-full h-full"
          />
       </div>
    )
