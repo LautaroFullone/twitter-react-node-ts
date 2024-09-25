@@ -1,38 +1,37 @@
 import { useCallback } from 'react'
 import { IconType } from 'react-icons'
+import useModalStore from '../hooks/useModalStore'
 import { useNavigate } from 'react-router-dom'
 
 interface SidebarItemProps {
    label: string
-   href?: string
    icon: IconType
+   href?: string
    onClick?: () => void
-   auth?: boolean
+   authRequired?: boolean
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
    label,
-   href,
    icon: Icon,
+   href,
    onClick,
-   auth = false,
+   authRequired = false,
 }) => {
+   const { openRegisterModal } = useModalStore()
    const navigate = useNavigate()
 
-   //const { currentUser } = useCurrentUser()
-   //const loginModal = useLoginModalState()
+   const currentUser = true
 
    const handleClick = useCallback(() => {
+      if (authRequired && !currentUser) openRegisterModal() //TODO: si pongo return corta, si no lo pongo y se tiene que logguear el flujo dsp sigue?
+
       if (onClick) {
          return onClick()
+      } else if (href) {
+         return navigate(href)
       }
-
-      // if (auth && !currentUser) {
-      //    loginModal.onOpen()
-      // } else if (href) {
-      if (href) navigate(href)
-      // }
-   }, [navigate, onClick, href])
+   }, [authRequired, currentUser, openRegisterModal, onClick, href, navigate])
 
    return (
       <div onClick={handleClick} className="flex flex-row items-center">

@@ -8,7 +8,7 @@ import SidebarTweetButton from './SidebarTweetButton'
 const Sidebar = () => {
    const navigate = useNavigate()
    //const { currentUser } = useCurrentUser()
-   const currentUser = null
+   const currentUser = true
 
    const items = [
       {
@@ -20,13 +20,13 @@ const Sidebar = () => {
          label: 'Notifications',
          href: '/notifications',
          icon: BsBellFill,
-         auth: true,
+         authRequired: true,
       },
       {
          label: 'Profile',
-         href: '/users/123',
+         href: '/profile/123',
          icon: FaUser,
-         auth: true,
+         authRequired: true,
       },
    ]
 
@@ -57,7 +57,7 @@ const Sidebar = () => {
                      href={item.href}
                      label={item.label}
                      icon={item.icon}
-                     auth={item.auth}
+                     authRequired={item.authRequired}
                   />
                ))}
                {currentUser && (

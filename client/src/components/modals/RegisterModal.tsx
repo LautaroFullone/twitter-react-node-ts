@@ -2,8 +2,11 @@ import { useCallback, useState } from 'react'
 import { Modal } from '../Modal'
 import Input from '../Input'
 import toast from 'react-hot-toast'
+import useModalStore from '../../hooks/useModalStore'
 
 const RegisterModal = () => {
+   const { isRegisterModalOpen, openRegisterModal, closeRegisterModal } =
+      useModalStore()
    const [email, setEmail] = useState('')
    const [name, setName] = useState('')
    const [username, setUsername] = useState('')
@@ -15,9 +18,8 @@ const RegisterModal = () => {
          return
       }
 
-      // registerModalState.onClose()
-      // loginModalState.onOpen()
-   }, [isLoading])
+      openRegisterModal()
+   }, [isLoading, openRegisterModal])
 
    const onSubmit = useCallback(async () => {
       try {
@@ -47,10 +49,10 @@ const RegisterModal = () => {
       // <p>Register Modal</p>
       <Modal
          disabled={isLoading}
-         isOpen={registerModalState.isOpen}
+         isOpen={isRegisterModalOpen}
          title="Create an Account"
          actionLabel="Register"
-         onClose={loginModalState.onClose}
+         onClose={closeRegisterModal}
          onSubmit={onSubmit}
          body={
             <div className="flex flex-col gap-4">

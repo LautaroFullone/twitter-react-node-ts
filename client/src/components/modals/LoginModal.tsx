@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { BsTwitter } from 'react-icons/bs'
-import useAuthModalStore from '../../hooks/useAuthModalStore'
+import useModalStore from '../../hooks/useModalStore'
 
 const LoginModal = () => {
-   const { isLoginModalOpen } = useAuthModalStore()
+   const { isLoginModalOpen } = useModalStore()
    const [isLogin, setIsLogin] = useState(true)
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
@@ -52,7 +52,7 @@ const LoginModal = () => {
                            type="email"
                            placeholder="nombre@ejemplo.com"
                            value={email}
-                           onChange={(e) => setEmail(e.target.value)}
+                           onChange={(evt) => setEmail(evt.target.value)}
                            required
                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                            disabled={isLoading}
@@ -69,7 +69,7 @@ const LoginModal = () => {
                            id="password"
                            type="password"
                            value={password}
-                           onChange={(e) => setPassword(e.target.value)}
+                           onChange={(evt) => setPassword(evt.target.value)}
                            required
                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                            disabled={isLoading}
