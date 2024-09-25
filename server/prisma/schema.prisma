@@ -15,15 +15,15 @@ datasource db {
 
 model Users {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
+  name            String
   username        String?   @unique
+  hashedPassword  String
   bio             String?
-  email           String?   @unique
+  email           String   @unique
   emailVerified   DateTime?
   image           String?
   coverImage      String?
   profileImage    String?
-  hashedPassword  String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   followingIds    String[]  @db.ObjectId

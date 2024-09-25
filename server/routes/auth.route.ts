@@ -9,41 +9,44 @@ const authRouter = Router()
 const prisma = new PrismaClient()
 
 authRouter.post('/register', async (req: Request, res: Response) => {
-   const { email, password, username } = req.body
+   const { email, password, name, username } = req.body
    const hashedPassword = await hash(password, 10)
 
    const newUser = await prisma.users.create({
       data: {
+         name,
          username,
          email,
          hashedPassword,
       },
    })
 
-   res.status(201).send({ data: newUser, msg: 'Register success' })
+   return res.status(201).send({ data: newUser, message: 'Register success' })
 })
 
-authRouter.post('/login', async (req, res) => {
-   const { username, password } = req.body
+authRouter.post('/login', async (req: Request, res: Response) => {
+   const { email, password } = req.body
 
    try {
       const user = await prisma.users.findFirst({
          where: {
-            name: username,
+            email,
          },
       })
 
-      if (!user) res.status(404).send('Invalid credentials')
+      if (!user) return res.status(404).send('Invalid credentials')
 
-      const passwordMatch = false //await compare(password, user.password)
+      const passwordMatch = await compare(password, user.hashedPassword)
 
-      if (!passwordMatch) res.status(404).send('Password do not match')
+      if (!passwordMatch) return res.status(404).send('Password do not match')
 
-      const token = 'hola' //sign({ userId: user.id }, jwtKey, { expiresIn: '3h' })
+      const token = sign({ userId: user.id }, jwtKey, { expiresIn: '3h' })
 
-      res.status(200).send({ data: { user, token }, msg: 'Login success' })
+      return res
+         .status(200)
+         .send({ data: { user, token }, message: 'Login success' })
    } catch (error) {
-      res.status(404).send(error)
+      return res.status(500).send(error)
    }
 })
 

@@ -15,7 +15,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
    href,
    icon: Icon,
    onClick,
-   //auth = false,
+   auth = false,
 }) => {
    const navigate = useNavigate()
 
