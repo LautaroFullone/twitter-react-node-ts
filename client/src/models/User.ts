@@ -8,9 +8,16 @@ export interface User {
    image: string
    coverImage: string
    profileImage: string
-   hashedPassword: string
+   password: string
    createdAt: string
    updatedAt: string
    followingIds: string[]
    hasNotification: boolean
 }
+
+export type UserRegisterForm = Pick<
+   User,
+   'name' | 'username' | 'email' | 'password'
+>
+
+export type UserLoginForm = Pick<User, 'email' | 'password'>
