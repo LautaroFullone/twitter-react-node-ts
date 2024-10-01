@@ -1,16 +1,20 @@
 import { create } from 'zustand'
 import { User } from '../models'
+import { devtools } from 'zustand/middleware'
 
 interface UserStore {
    currentUser: User | null
 
-   dispatchCurrentUser: (user: User) => void
+   dispatchCurrentUser: (user: User | null) => void
 }
 
-export const useUserStore = create<UserStore>()((set) => ({
-   currentUser: null,
+export const useUserStore = create<UserStore>()(
+   devtools((set) => ({
+      currentUser: null,
 
-   dispatchCurrentUser: (user: User) => set({ currentUser: user }),
-}))
+      dispatchCurrentUser: (value: User | null) =>
+         set((state) => ({ currentUser: value }), false, 'dispatchCurrentUser'),
+   }))
+)
 
 export default useUserStore

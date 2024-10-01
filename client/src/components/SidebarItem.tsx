@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { IconType } from 'react-icons'
-import useModalStore from '../hooks/useModalStore'
 import { useNavigate } from 'react-router-dom'
+import { useModalStore, useUserStore } from '../hooks'
 
 interface SidebarItemProps {
    label: string
@@ -18,20 +18,20 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
    onClick,
    authRequired = false,
 }) => {
-   const { openRegisterModal } = useModalStore()
+   const { openLoginModal } = useModalStore()
    const navigate = useNavigate()
 
-   const currentUser = true
+   const { currentUser } = useUserStore()
 
    const handleClick = useCallback(() => {
-      if (authRequired && !currentUser) openRegisterModal() //TODO: si pongo return corta, si no lo pongo y se tiene que logguear el flujo dsp sigue?
+      if (authRequired && !currentUser) return openLoginModal() //TODO: si pongo return corta, si no lo pongo y se tiene que logguear el flujo dsp sigue?
 
       if (onClick) {
          return onClick()
       } else if (href) {
          return navigate(href)
       }
-   }, [authRequired, currentUser, openRegisterModal, onClick, href, navigate])
+   }, [authRequired, currentUser, openLoginModal, onClick, href, navigate])
 
    return (
       <div onClick={handleClick} className="flex flex-row items-center">

@@ -1,5 +1,5 @@
 import AuthModal from './AuthModal'
-import { useBasicForm, useModalStore } from '../../hooks'
+import { useBasicForm, useModalStore, useUserStore } from '../../hooks'
 import { useState } from 'react'
 import { UserLoginForm } from '../../models'
 import { login } from '../../services'
@@ -12,6 +12,7 @@ const initialFormData = {
 
 const LoginModal = () => {
    const { isLoginModalOpen, closeLoginModal } = useModalStore()
+   const { dispatchCurrentUser } = useUserStore()
    const { formData, handleChange, resetForm } = useBasicForm<UserLoginForm>(initialFormData)
 
    const [isLoading, setIsLoading] = useState(false)
@@ -24,6 +25,7 @@ const LoginModal = () => {
          .then(({ data }) => {
             resetForm()
             sessionStorage.setItem('token', data.token)
+            dispatchCurrentUser(data.user)
             toast.success(data.message)
             closeLoginModal()
          })

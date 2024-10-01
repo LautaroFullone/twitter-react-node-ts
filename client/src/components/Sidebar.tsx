@@ -4,13 +4,14 @@ import { BiLogOut } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import SidebarItem from './SidebarItem'
 import SidebarTweetButton from './SidebarTweetButton'
+import { SidebarAction } from '../models/Sidebar'
+import { useUserStore } from '../hooks'
 
 const Sidebar = () => {
    const navigate = useNavigate()
-   //const { currentUser } = useCurrentUser()
-   const currentUser = true
+   const { currentUser, dispatchCurrentUser } = useUserStore()
 
-   const items = [
+   const itemActions: SidebarAction[] = [
       {
          label: 'Home',
          href: '/',
@@ -24,7 +25,7 @@ const Sidebar = () => {
       },
       {
          label: 'Profile',
-         href: '/profile/123',
+         href: `/profile/${currentUser?.id}`,
          icon: FaUser,
          authRequired: true,
       },
@@ -50,8 +51,8 @@ const Sidebar = () => {
                >
                   SidebarLogo
                </div>
-               )
-               {items.map((item) => (
+
+               {itemActions.map((item) => (
                   <SidebarItem
                      key={item.href}
                      href={item.href}
@@ -62,7 +63,10 @@ const Sidebar = () => {
                ))}
                {currentUser && (
                   <SidebarItem
-                     onClick={() => {}}
+                     onClick={() => {
+                        sessionStorage.removeItem('token')
+                        dispatchCurrentUser(null)
+                     }}
                      label="Logout"
                      icon={BiLogOut}
                   />
