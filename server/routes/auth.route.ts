@@ -48,7 +48,7 @@ authRouter.post('/login', async (req: Request, res: Response) => {
          return res.status(404).send('Password do not match')
       }
 
-      const token = sign({ userId: user.id }, jwtKey, { expiresIn: '3h' })
+      const token = sign({ userId: user.id }, jwtKey, { expiresIn: '1h' })
 
       return res.status(200).send({ user, token, message: 'Login success' })
    } catch (error) {
