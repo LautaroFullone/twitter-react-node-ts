@@ -1,24 +1,14 @@
-import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface AvatarProps {
    userId: string
    isLarge?: boolean
    hasBorder?: boolean
+   imageSrc: string
 }
 
-const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
+const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder, imageSrc }) => {
    const navigate = useNavigate()
-   const user = { profileImage: 'hola ' }
-   //const { user } = useUser(userId)
-
-   const onClick = useCallback(
-      (evt: React.MouseEvent<HTMLImageElement>) => {
-         evt.stopPropagation()
-         navigate(`/pages/users/${userId}`)
-      },
-      [navigate, userId]
-   )
 
    return (
       <div
@@ -35,8 +25,8 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
       >
          <img
             alt="Avatar"
-            onClick={onClick}
-            src={user?.profileImage || '/images/user-placeholder.jpg'}
+            onClick={() => navigate(`/profile/${userId}`)}
+            src={imageSrc || '/images/user-placeholder.jpg'}
             onError={(e) => {
                e.currentTarget.src = '/images/user-placeholder.jpg'
             }}
