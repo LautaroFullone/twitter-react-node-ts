@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { authRouter, usersRouter } from '../routes'
+import { authRouter, usersRouter } from './routes'
 import cors from 'cors'
 
 const PORT = process.env.PORT || 3040

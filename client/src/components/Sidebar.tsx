@@ -5,11 +5,15 @@ import { useNavigate } from 'react-router-dom'
 import SidebarItem from './SidebarItem'
 import SidebarTweetButton from './SidebarTweetButton'
 import { SidebarAction } from '../models/Sidebar'
-import { useUserStore } from '../hooks'
+import { useToken } from '../hooks'
+import { useQueryClient } from '@tanstack/react-query'
+import useAuth from '../hooks/api/useAuth'
 
 const Sidebar = () => {
    const navigate = useNavigate()
-   const { currentUser, dispatchCurrentUser } = useUserStore()
+   const { currentUser } = useAuth()
+   const { removeToken } = useToken()
+   const queryClient = useQueryClient()
 
    const itemActions: SidebarAction[] = [
       {
@@ -64,8 +68,9 @@ const Sidebar = () => {
                {currentUser && (
                   <SidebarItem
                      onClick={() => {
-                        sessionStorage.removeItem('token')
-                        dispatchCurrentUser(null)
+                        removeToken()
+                        queryClient.invalidateQueries({ queryKey: ['auth-user'] })
+                        navigate('/')
                      }}
                      label="Logout"
                      icon={BiLogOut}

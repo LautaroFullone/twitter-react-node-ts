@@ -1,19 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from 'zustand'
-import { User } from '../models'
 import { devtools } from 'zustand/middleware'
 
 interface UserStore {
-   currentUser: User | null
+   loginSuccess: boolean
 
-   dispatchCurrentUser: (user: User | null) => void
+   dispatchLoginSuccess: (value: boolean) => void
 }
 
 export const useUserStore = create<UserStore>()(
    devtools((set) => ({
-      currentUser: null,
+      loginSuccess: false,
 
-      dispatchCurrentUser: (value: User | null) =>
-         set((state) => ({ currentUser: value }), false, 'dispatchCurrentUser'),
+      dispatchLoginSuccess: (value: boolean) =>
+         set((state) => ({ loginSuccess: value }), false, 'dispatchLoginSuccess'),
    }))
 )
 

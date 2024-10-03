@@ -1,22 +1,22 @@
 import { useMemo } from 'react'
-import { useUserStore } from '../hooks'
 import { User } from '../models'
 import { format } from 'date-fns'
 import Button from './Button'
 import { BiCalendar } from 'react-icons/bi'
+import useAuth from '../hooks/api/useAuth'
 
 interface UserBioProps {
    user: User & { followersCount: number }
 }
 
 const UserBio: React.FC<UserBioProps> = ({ user }) => {
-   const { currentUser } = useUserStore()
+   const { currentUser } = useAuth()
 
    const createdAt = useMemo(() => {
       if (!currentUser?.createdAt) return null
 
       return format(new Date(currentUser.createdAt), 'MMMM yyyy')
-   }, [currentUser?.createdAt])
+   }, [currentUser])
 
    return (
       <div className="border-b-[1px] border-neutral-800 pb-4">

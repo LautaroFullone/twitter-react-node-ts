@@ -3,14 +3,14 @@ import { getUsers } from '../../services'
 
 const useGetUsers = () => {
    const { data, error, isLoading } = useQuery({
-      queryKey: ['getUsers'],
+      queryKey: ['get-users'],
       queryFn: getUsers,
       staleTime: 20 * 60 * 1000, //20min
       retry: 1,
    })
 
    return {
-      data,
+      users: data,
       error,
       isLoading,
    }

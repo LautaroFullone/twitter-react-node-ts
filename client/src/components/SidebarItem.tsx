@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
 import { IconType } from 'react-icons'
 import { useNavigate } from 'react-router-dom'
-import { useModalStore, useUserStore } from '../hooks'
+import { useModalStore } from '../hooks'
+import useAuth from '../hooks/api/useAuth'
 
 interface SidebarItemProps {
    label: string
@@ -21,10 +22,12 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
    const { openLoginModal } = useModalStore()
    const navigate = useNavigate()
 
-   const { currentUser } = useUserStore()
+   const { currentUser } = useAuth()
 
    const handleClick = useCallback(() => {
-      if (authRequired && !currentUser) return openLoginModal() //TODO: si pongo return corta, si no lo pongo y se tiene que logguear el flujo dsp sigue?
+      if (authRequired && !currentUser) {
+         return openLoginModal()
+      }
 
       if (onClick) {
          return onClick()
