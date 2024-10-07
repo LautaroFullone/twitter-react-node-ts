@@ -1,3 +1,3 @@
-import { requireAuth } from './requireAuth.'
+import { requireAuth } from './requireAuth'
 
 export { requireAuth }

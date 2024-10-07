@@ -3,7 +3,7 @@ import { User } from '../models'
 import { format } from 'date-fns'
 import Button from './Button'
 import { BiCalendar } from 'react-icons/bi'
-import useAuth from '../hooks/api/useAuth'
+import { useAuth, useModalStore } from '../hooks'
 
 interface UserBioProps {
    user: User & { followersCount: number }
@@ -11,20 +11,27 @@ interface UserBioProps {
 
 const UserBio: React.FC<UserBioProps> = ({ user }) => {
    const { currentUser } = useAuth()
+   const { modalActions } = useModalStore()
 
    const createdAt = useMemo(() => {
-      if (!currentUser?.createdAt) return null
+      if (!user?.createdAt) return null
 
-      return format(new Date(currentUser.createdAt), 'MMMM yyyy')
-   }, [currentUser])
+      return format(new Date(user.createdAt), 'MMMM yyyy')
+   }, [user])
 
    return (
       <div className="border-b-[1px] border-neutral-800 pb-4">
          <div className="flex justify-end p-2">
             {currentUser?.id === user.id ? (
-               <Button label="Edit" secondary onClick={() => {}} />
+               <Button label="Edit" secondary onClick={() => modalActions.openEditModal()} />
             ) : (
-               <Button label="Follow" secondary onClick={() => {}} />
+               <Button
+                  label="Follow"
+                  secondary
+                  onClick={() => {
+                     if (!currentUser) return modalActions.openLoginModal()
+                  }}
+               />
             )}
          </div>
 
@@ -40,7 +47,7 @@ const UserBio: React.FC<UserBioProps> = ({ user }) => {
 
             <div className="flex flex-row items-center gap-2 mt-4 text-neutral-500">
                <BiCalendar size={24} />
-               <p>Joined {createdAt}</p>
+               <p>Joined in {createdAt}</p>
             </div>
 
             <div className="flex flex-row items-center mt-4 gap-6">

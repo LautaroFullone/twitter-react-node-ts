@@ -1,4 +1,4 @@
 import { login, register, authenticatedUser } from './authService'
-import { getUserById, getUsers } from './usersService'
+import { getUserById, getUsers, editUser } from './usersService'
 
-export { login, register, authenticatedUser, getUserById, getUsers }
+export { login, register, authenticatedUser, getUserById, getUsers, editUser }

@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express'
 import { requireAuth } from '../middlewares'
-import { UserReq } from 'middlewares/requireAuth.'
+import { UserReq } from '../middlewares/requireAuth'
 import prisma from '../prismaClient'
 
 const usersRouter = Router()
@@ -28,7 +28,6 @@ usersRouter.get('/', async (req: Request, res: Response) => {
             createdAt: 'desc',
          },
       })
-
       return res.status(200).send({ users })
    } catch (error) {
       return res.status(500).send(error)

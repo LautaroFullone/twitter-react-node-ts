@@ -1,14 +1,12 @@
+import { requireAuth, UserReq } from '../middlewares/requireAuth'
 import { Request, Response, Router } from 'express'
 import { hash, compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import prisma from '../prismaClient'
-import { requireAuth, UserReq } from '../middlewares/requireAuth.'
 
 const jwtSecret = process.env.JWT_SECRET as string
 
 const authRouter = Router()
-
-authRouter.get('/logged', async (req: Request, resp: Response) => {})
 
 authRouter.post('/register', async (req: Request, res: Response) => {
    try {

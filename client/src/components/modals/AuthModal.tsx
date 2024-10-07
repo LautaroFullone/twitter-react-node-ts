@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { BsTwitter } from 'react-icons/bs'
-import useModalStore from '../../hooks/useModalStore'
 import { BiX } from 'react-icons/bi'
+import { useModalStore } from '../../hooks'
 
 interface ModalProps {
    type: 'LOGIN' | 'REGISTER'
@@ -10,18 +10,8 @@ interface ModalProps {
    children?: ReactNode
 }
 
-const AuthModal: React.FC<ModalProps> = ({
-   type,
-   isLoading = false,
-   isOpen = false,
-   children,
-}) => {
-   const {
-      closeLoginModal,
-      closeRegisterModal,
-      openLoginModal,
-      openRegisterModal,
-   } = useModalStore()
+const AuthModal: React.FC<ModalProps> = ({ type, isLoading = false, isOpen = false, children }) => {
+   const { modalActions } = useModalStore()
 
    return (
       <>
@@ -30,8 +20,8 @@ const AuthModal: React.FC<ModalProps> = ({
                <div className="bg-white rounded-2xl p-8 w-full max-w-md relative">
                   <button
                      onClick={() => {
-                        if (type === 'LOGIN') closeLoginModal()
-                        else closeRegisterModal()
+                        if (type === 'LOGIN') return modalActions.closeLoginModal()
+                        else return modalActions.closeRegisterModal()
                      }}
                      className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
                      disabled={isLoading}
@@ -42,9 +32,7 @@ const AuthModal: React.FC<ModalProps> = ({
                      <BsTwitter className="text-blue-400 w-8 h-8" />
                   </div>
                   <h2 className="text-2xl font-bold text-center mb-2">
-                     {type == 'LOGIN'
-                        ? 'Iniciar sesión en Twitter'
-                        : 'Regístrate en Twitter'}
+                     {type == 'LOGIN' ? 'Iniciar sesión en Twitter' : 'Regístrate en Twitter'}
                   </h2>
                   <p className="text-gray-600 text-center mb-6">
                      {type == 'LOGIN'
@@ -58,11 +46,11 @@ const AuthModal: React.FC<ModalProps> = ({
                      <button
                         onClick={() => {
                            if (type === 'LOGIN') {
-                              closeLoginModal()
-                              openRegisterModal()
+                              modalActions.closeLoginModal()
+                              modalActions.openRegisterModal()
                            } else {
-                              closeRegisterModal()
-                              openLoginModal()
+                              modalActions.closeRegisterModal()
+                              modalActions.openLoginModal()
                            }
                         }}
                         className="text-blue-500 hover:underline"

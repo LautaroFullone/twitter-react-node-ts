@@ -15,9 +15,8 @@ export interface User {
    hasNotification: boolean
 }
 
-export type UserRegisterForm = Pick<
-   User,
-   'name' | 'username' | 'email' | 'password'
->
+export type UserRegisterForm = Pick<User, 'name' | 'username' | 'email' | 'password'>
 
 export type UserLoginForm = Pick<User, 'email' | 'password'>
+
+export type UserEditForm = Pick<User, 'name' | 'username' | 'bio' | 'profileImage' | 'coverImage'>

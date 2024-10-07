@@ -5,14 +5,14 @@ import { UserLoginForm } from '../../models'
 import { login } from '../../services'
 import toast from 'react-hot-toast'
 
-const initialFormData = {
+const initialFormData: UserLoginForm = {
    email: '',
    password: '',
 }
 
 const LoginModal = () => {
-   const { formData, handleChange, resetForm } = useBasicForm<UserLoginForm>(initialFormData)
-   const { isLoginModalOpen, closeLoginModal } = useModalStore()
+   const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
+   const { modalActions, isLoginModalOpen } = useModalStore()
    const { dispatchLoginSuccess } = useUserStore()
    const { setToken } = useToken()
 
@@ -28,7 +28,7 @@ const LoginModal = () => {
             setToken(data.token)
             dispatchLoginSuccess(true)
             toast.success(data.message)
-            closeLoginModal()
+            modalActions.closeLoginModal()
          })
          .catch(({ response }) => {
             console.log('error')

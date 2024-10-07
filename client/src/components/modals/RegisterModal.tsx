@@ -5,7 +5,7 @@ import { register } from '../../services'
 import { UserRegisterForm } from '../../models'
 import toast from 'react-hot-toast'
 
-const initialFormData = {
+const initialFormData: UserRegisterForm = {
    name: '',
    email: '',
    username: '',
@@ -14,7 +14,7 @@ const initialFormData = {
 
 const RegisterModal = () => {
    const { isRegisterModalOpen } = useModalStore()
-   const { formData, handleChange, resetForm } = useBasicForm<UserRegisterForm>(initialFormData)
+   const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
 
    const [isLoading, setIsLoading] = useState(false)
 
@@ -22,6 +22,7 @@ const RegisterModal = () => {
       evt.preventDefault()
       setIsLoading(true)
 
+      //TODO: fixear esto
       await register(formData)
          .then(({ data }) => {
             resetForm()

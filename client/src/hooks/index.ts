@@ -4,5 +4,6 @@ import useBasicForm from './useBasicForm'
 import useModalStore from './useModalStore'
 import useUserStore from './useUserStore'
 import useToken from './useToken'
+import useAuth from './api/useAuth'
 
-export { useBasicForm, useModalStore, useUserStore, useGetUserById, useGetUsers, useToken }
+export { useAuth, useBasicForm, useModalStore, useUserStore, useGetUserById, useGetUsers, useToken }

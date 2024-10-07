@@ -1,8 +1,7 @@
 import { useCallback } from 'react'
 import { IconType } from 'react-icons'
 import { useNavigate } from 'react-router-dom'
-import { useModalStore } from '../hooks'
-import useAuth from '../hooks/api/useAuth'
+import { useAuth, useModalStore } from '../hooks'
 
 interface SidebarItemProps {
    label: string
@@ -19,14 +18,14 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
    onClick,
    authRequired = false,
 }) => {
-   const { openLoginModal } = useModalStore()
+   const { modalActions } = useModalStore()
    const navigate = useNavigate()
 
    const { currentUser } = useAuth()
 
    const handleClick = useCallback(() => {
       if (authRequired && !currentUser) {
-         return openLoginModal()
+         return modalActions.openLoginModal()
       }
 
       if (onClick) {
@@ -34,7 +33,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       } else if (href) {
          return navigate(href)
       }
-   }, [authRequired, currentUser, openLoginModal, onClick, href, navigate])
+   }, [authRequired, currentUser, onClick, href, modalActions, navigate])
 
    return (
       <div onClick={handleClick} className="flex flex-row items-center">

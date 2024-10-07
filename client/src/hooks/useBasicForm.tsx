@@ -15,7 +15,7 @@ const useBasicForm = <T,>(initialState: T) => {
       setFormData(initialState)
    }
 
-   return { formData, handleChange, resetForm }
+   return { formData, handleChange, resetForm, setFormData }
 }
 
 export default useBasicForm
