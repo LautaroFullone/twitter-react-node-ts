@@ -1,9 +1,7 @@
-import AuthModal from './AuthModal'
-import { useBasicForm, useModalStore, useToken, useUserStore } from '../../hooks'
-import { useState } from 'react'
+import { useBasicForm, useLogin, useModalStore } from '../../hooks'
 import { UserLoginForm } from '../../models'
-import { login } from '../../services'
-import toast from 'react-hot-toast'
+import AuthModal from './AuthModal'
+import { useState } from 'react'
 
 const initialFormData: UserLoginForm = {
    email: '',
@@ -13,8 +11,7 @@ const initialFormData: UserLoginForm = {
 const LoginModal = () => {
    const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
    const { modalActions, isLoginModalOpen } = useModalStore()
-   const { dispatchLoginSuccess } = useUserStore()
-   const { setToken } = useToken()
+   const { loginUser } = useLogin()
 
    const [isLoading, setIsLoading] = useState(false)
 
@@ -22,20 +19,11 @@ const LoginModal = () => {
       evt.preventDefault()
       setIsLoading(true)
 
-      await login(formData)
-         .then((data) => {
-            resetForm()
-            setToken(data.token)
-            dispatchLoginSuccess(true)
-            toast.success(data.message)
-            modalActions.closeLoginModal()
-         })
-         .catch(({ response }) => {
-            console.log('error')
-            toast.error(response.data || 'Login Error')
-         })
+      await loginUser(formData)
 
       setIsLoading(false)
+      resetForm()
+      modalActions.closeLoginModal()
    }
 
    return (

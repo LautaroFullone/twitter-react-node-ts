@@ -3,14 +3,14 @@ import { User } from '../models'
 import { format } from 'date-fns'
 import Button from './Button'
 import { BiCalendar } from 'react-icons/bi'
-import { useAuth, useModalStore } from '../hooks'
+import { useUserStore, useModalStore } from '../hooks'
 
 interface UserBioProps {
    user: User & { followersCount: number }
 }
 
 const UserBio: React.FC<UserBioProps> = ({ user }) => {
-   const { currentUser } = useAuth()
+   const { currentUser } = useUserStore()
    const { modalActions } = useModalStore()
 
    const createdAt = useMemo(() => {

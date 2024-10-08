@@ -1,8 +1,8 @@
 import { PageHeader } from '../../components'
-import useAuth from '../../hooks/api/useAuth'
+import { useUserStore } from '../../hooks'
 
 const HomePage = () => {
-   const { currentUser } = useAuth()
+   const { currentUser } = useUserStore()
 
    return (
       <>

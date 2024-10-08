@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import SidebarItem from './SidebarItem'
 import SidebarTweetButton from './SidebarTweetButton'
 import { SidebarAction } from '../models/Sidebar'
-import { useToken } from '../hooks'
+import { useUserStore, useToken } from '../hooks'
 import { useQueryClient } from '@tanstack/react-query'
-import useAuth from '../hooks/api/useAuth'
 
 const Sidebar = () => {
    const navigate = useNavigate()
-   const { currentUser } = useAuth()
+   const { currentUser, userActions } = useUserStore()
    const { removeToken } = useToken()
    const queryClient = useQueryClient()
 
@@ -69,6 +68,7 @@ const Sidebar = () => {
                   <SidebarItem
                      onClick={() => {
                         removeToken()
+                        userActions.dispatchCurrentUser(null)
                         queryClient.invalidateQueries({ queryKey: ['auth-user'] })
                         navigate('/')
                      }}

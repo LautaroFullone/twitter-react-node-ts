@@ -1,9 +1,7 @@
-import AuthModal from './AuthModal'
-import { useBasicForm, useModalStore } from '../../hooks'
-import { useState } from 'react'
-import { register } from '../../services'
+import { useBasicForm, useModalStore, useRegister } from '../../hooks'
 import { UserRegisterForm } from '../../models'
-import toast from 'react-hot-toast'
+import AuthModal from './AuthModal'
+import { useState } from 'react'
 
 const initialFormData: UserRegisterForm = {
    name: '',
@@ -13,8 +11,9 @@ const initialFormData: UserRegisterForm = {
 }
 
 const RegisterModal = () => {
-   const { isRegisterModalOpen } = useModalStore()
    const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
+   const { modalActions, isRegisterModalOpen } = useModalStore()
+   const { registerUser } = useRegister()
 
    const [isLoading, setIsLoading] = useState(false)
 
@@ -22,17 +21,11 @@ const RegisterModal = () => {
       evt.preventDefault()
       setIsLoading(true)
 
-      //TODO: fixear esto
-      await register(formData)
-         .then(({ data }) => {
-            resetForm()
-            toast.success(data.message)
-         })
-         .catch(({ response }) => {
-            console.log('error')
-            toast.error(response.data || 'Register Error')
-         })
+      await registerUser(formData)
+
       setIsLoading(false)
+      resetForm()
+      modalActions.closeRegisterModal()
    }
 
    return (

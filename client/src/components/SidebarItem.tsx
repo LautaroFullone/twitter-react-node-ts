@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { IconType } from 'react-icons'
 import { useNavigate } from 'react-router-dom'
-import { useAuth, useModalStore } from '../hooks'
+import { useUserStore, useModalStore } from '../hooks'
 
 interface SidebarItemProps {
    label: string
@@ -21,7 +21,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
    const { modalActions } = useModalStore()
    const navigate = useNavigate()
 
-   const { currentUser } = useAuth()
+   const { currentUser } = useUserStore()
 
    const handleClick = useCallback(() => {
       if (authRequired && !currentUser) {

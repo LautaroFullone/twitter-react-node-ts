@@ -1,10 +1,9 @@
 import Avatar from './Avatar'
-import { useGetUsers } from '../hooks'
-import useAuth from '../hooks/api/useAuth'
+import { useGetUsers, useUserStore } from '../hooks'
 
 const FollowBar = () => {
    const { users, isLoading } = useGetUsers()
-   const { currentUser } = useAuth()
+   const { currentUser } = useUserStore()
 
    if (isLoading) {
       return <div className="text-white">Loading....</div>

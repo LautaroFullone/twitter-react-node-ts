@@ -1,5 +1,5 @@
 // import { useEffect, useState } from 'react'
-// import { useAuth, useBasicForm } from '../../hooks'
+// import { useUserStore, useBasicForm } from '../../hooks'
 // import { UserEditForm } from '../../models/User'
 // import useEditUser from '../../hooks/api/useEditUser'
 
@@ -12,7 +12,7 @@
 // }
 // //TODO: TERMINAR ESTO
 // const EditModal = () => {
-//    const { currentUser } = useAuth()
+//    const { currentUser } = useUserStore()
 //    // const { data } = useGetUserById(currentUser?.id)
 //    const { formData, handleChange, setFormData } = useBasicForm(initialFormData)
 

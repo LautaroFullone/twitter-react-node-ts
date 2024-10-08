@@ -1,10 +1,9 @@
 import { PageHeader } from '../../components'
-import useAuth from '../../hooks/api/useAuth'
+import { useUserStore } from '../../hooks'
 
 const NotificationsPage = () => {
-   const { currentUser, error } = useAuth()
+   const { currentUser } = useUserStore()
 
-   console.log('# noti user ', currentUser, ' error: ', error)
    return (
       <>
          <PageHeader label="Notifications" />
