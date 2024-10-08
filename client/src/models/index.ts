@@ -1,3 +1,3 @@
-import { User, UserLoginForm, UserRegisterForm } from './User'
+import { User, UserLoginForm, UserRegisterForm, UserEditForm } from './User'
 
-export type { User, UserLoginForm, UserRegisterForm }
+export type { User, UserLoginForm, UserRegisterForm, UserEditForm }

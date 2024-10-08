@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FollowBar, LoginModal, RegisterModal, Sidebar } from '../components'
+import { useGetCurrentUser, useUserStore } from '../hooks'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
-import { useGetCurrentUser, useUserStore } from '../hooks'
 import { useEffect } from 'react'
 
 const AppLayout = () => {

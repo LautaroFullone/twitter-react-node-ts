@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { User } from '../../models'
+import { create } from 'zustand'
 
 interface UserStoreProps {
    currentUser: User | null

@@ -1,7 +1,7 @@
-import { Navigate, useParams } from 'react-router-dom'
 import { PageHeader, UserBio, UserHero } from '../../components'
-import { ClipLoader } from 'react-spinners'
+import { Navigate, useParams } from 'react-router-dom'
 import { useGetUserById } from '../../hooks'
+import { ClipLoader } from 'react-spinners'
 
 const UserProfilePage = () => {
    const { userId } = useParams()

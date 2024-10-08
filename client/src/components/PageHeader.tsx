@@ -1,16 +1,13 @@
-import { useCallback } from 'react'
-import { BiArrowBack } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
+import { BiArrowBack } from 'react-icons/bi'
+import { useCallback } from 'react'
 
 interface PageHeaderProps {
    label?: string
    showBackArrow?: boolean
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({
-   label,
-   showBackArrow = false,
-}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ label, showBackArrow = false }) => {
    const navigate = useNavigate()
 
    const handleBack = useCallback(() => {

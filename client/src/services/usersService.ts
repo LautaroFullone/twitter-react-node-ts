@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { User } from '../models'
-import { UserEditForm } from '../models/User'
+import { User, UserEditForm } from '../models'
 
 const apiURL = 'http://localhost:3040'
 

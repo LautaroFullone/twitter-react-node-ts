@@ -1,5 +1,5 @@
-import Avatar from './Avatar'
 import { useGetUsers, useUserStore } from '../hooks'
+import Avatar from './Avatar'
 
 const FollowBar = () => {
    const { users, isLoading } = useGetUsers()

@@ -6,8 +6,8 @@ import LoginModal from './modals/LoginModal'
 import PageHeader from './PageHeader'
 import RegisterModal from './modals/RegisterModal'
 import Sidebar from './Sidebar'
-import UserHero from './UserHero'
 import UserBio from './UserBio'
+import UserHero from './UserHero'
 
 export {
    Avatar,
@@ -15,9 +15,9 @@ export {
    FollowBar,
    Input,
    LoginModal,
-   PageHeader,
    RegisterModal,
+   PageHeader,
    Sidebar,
-   UserHero,
    UserBio,
+   UserHero,
 }

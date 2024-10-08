@@ -1,9 +1,9 @@
-import { useMemo } from 'react'
-import { User } from '../models'
-import { format } from 'date-fns'
-import Button from './Button'
-import { BiCalendar } from 'react-icons/bi'
 import { useUserStore, useModalStore } from '../hooks'
+import { BiCalendar } from 'react-icons/bi'
+import { format } from 'date-fns'
+import { User } from '../models'
+import { useMemo } from 'react'
+import Button from './Button'
 
 interface UserBioProps {
    user: User & { followersCount: number }

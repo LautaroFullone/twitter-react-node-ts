@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
+import { useCallback } from 'react'
 import Button from './Button'
 
 interface ModalProps {
@@ -94,9 +94,7 @@ export const Modal: React.FC<ModalProps> = ({
                      p-10
                      rounded-t"
                   >
-                     <h3 className="text-3xl font-semibold text-white">
-                        {title}
-                     </h3>
+                     <h3 className="text-3xl font-semibold text-white">{title}</h3>
 
                      <button
                         onClick={handleClose}

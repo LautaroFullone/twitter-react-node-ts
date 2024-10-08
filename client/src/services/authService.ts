@@ -1,6 +1,6 @@
-import { isAxiosError } from 'axios'
-import { apiTwitter } from '../lib/axios'
 import { User, UserLoginForm, UserRegisterForm } from '../models'
+import { apiTwitter } from '../lib/axios'
+import { isAxiosError } from 'axios'
 
 interface ResponseApi {
    user: User
