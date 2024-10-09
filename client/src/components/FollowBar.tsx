@@ -19,7 +19,7 @@ const FollowBar = () => {
                      .filter((user) => user.id !== currentUser?.id)
                      .map((user) => (
                         <div key={user.id} className="flex flex-row gap-4">
-                           <Avatar userId={user.id} imageSrc={user.image} />
+                           <Avatar userId={user.id} imageSrc={user.profileImage} />
                            <div className="flex flex-col justify-center">
                               <p
                                  className="text-white 

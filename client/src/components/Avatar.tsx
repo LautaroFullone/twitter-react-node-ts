@@ -14,7 +14,6 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder, imageSrc })
       <div
          className={`
             rounded-full
-            hover:opacity-90
             transition
             cursor-pointer
             relative
