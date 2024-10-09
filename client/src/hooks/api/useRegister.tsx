@@ -1,10 +1,15 @@
 import { useMutation } from '@tanstack/react-query'
-import { login } from '../../services'
+import { register } from '../../services'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 const useRegister = () => {
+   const [isLoading, setIsLoading] = useState(false)
+
    const { mutateAsync: registerUser } = useMutation({
-      mutationFn: login,
+      mutationFn: register,
+      onMutate: () => setIsLoading(true),
+      onSettled: () => setIsLoading(false),
       onSuccess: (data) => {
          toast.success(data.message)
       },
@@ -13,7 +18,7 @@ const useRegister = () => {
       },
    })
 
-   return { registerUser }
+   return { registerUser, isLoading }
 }
 
 export default useRegister

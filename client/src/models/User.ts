@@ -5,9 +5,8 @@ export interface User {
    bio: string
    email: string
    emailVerified: string
-   image: string
-   coverImage: string
-   profileImage: string
+   coverImage: string | null
+   profileImage: string | null
    password: string
    createdAt: string
    updatedAt: string

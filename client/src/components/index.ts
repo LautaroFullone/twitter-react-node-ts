@@ -8,6 +8,7 @@ import RegisterModal from './modals/RegisterModal'
 import Sidebar from './Sidebar'
 import UserBio from './UserBio'
 import UserHero from './UserHero'
+import EditModal from './modals/EditModal'
 
 export {
    Avatar,
@@ -20,4 +21,5 @@ export {
    Sidebar,
    UserBio,
    UserHero,
+   EditModal,
 }

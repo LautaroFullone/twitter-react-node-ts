@@ -1,17 +1,9 @@
 import { useUserStore, useModalStore } from '../hooks'
+import { SidebarAction } from '../models/Sidebar'
 import { useNavigate } from 'react-router-dom'
-import { IconType } from 'react-icons'
 import { useCallback } from 'react'
 
-interface SidebarItemProps {
-   label: string
-   icon: IconType
-   href?: string
-   onClick?: () => void
-   authRequired?: boolean
-}
-
-const SidebarItem: React.FC<SidebarItemProps> = ({
+const SidebarItem: React.FC<SidebarAction> = ({
    label,
    icon: Icon,
    href,

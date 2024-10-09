@@ -1,5 +1,5 @@
 import { BsBellFill, BsHouseFill } from 'react-icons/bs'
-import { useQueryClient } from '@tanstack/react-query'
+//import { useQueryClient } from '@tanstack/react-query'
 import SidebarTweetButton from './SidebarTweetButton'
 import { SidebarAction } from '../models/Sidebar'
 import { useUserStore, useToken } from '../hooks'
@@ -7,32 +7,43 @@ import { useNavigate } from 'react-router-dom'
 import { BiLogOut } from 'react-icons/bi'
 import { FaUser } from 'react-icons/fa'
 import SidebarItem from './SidebarItem'
+import { useMemo } from 'react'
 
 const Sidebar = () => {
    const navigate = useNavigate()
    const { currentUser, userActions } = useUserStore()
    const { removeToken } = useToken()
-   const queryClient = useQueryClient()
+   //const queryClient = useQueryClient()
 
-   const itemActions: SidebarAction[] = [
-      {
-         label: 'Home',
-         href: '/',
-         icon: BsHouseFill,
-      },
-      {
-         label: 'Notifications',
-         href: '/notifications',
-         icon: BsBellFill,
-         authRequired: true,
-      },
-      {
-         label: 'Profile',
-         href: `/profile/${currentUser?.id}`,
-         icon: FaUser,
-         authRequired: true,
-      },
-   ]
+   const itemActions: SidebarAction[] = useMemo(
+      () => [
+         {
+            label: 'Home',
+            href: '/',
+            icon: BsHouseFill,
+         },
+         {
+            label: 'Notifications',
+            href: '/notifications',
+            icon: BsBellFill,
+            authRequired: true,
+         },
+         {
+            label: 'Profile',
+            href: `/profile/${currentUser?.id}`,
+            icon: FaUser,
+            authRequired: true,
+         },
+      ],
+      [currentUser?.id]
+   )
+
+   const handleLogout = () => {
+      removeToken()
+      userActions.dispatchCurrentUser(null)
+      //queryClient.invalidateQueries({ queryKey: ['auth-user'] })
+      navigate('/')
+   }
 
    return (
       <div className="col-span-1 h-full pr-4 md:pr-6">
@@ -64,17 +75,9 @@ const Sidebar = () => {
                      authRequired={item.authRequired}
                   />
                ))}
+
                {currentUser && (
-                  <SidebarItem
-                     onClick={() => {
-                        removeToken()
-                        userActions.dispatchCurrentUser(null)
-                        queryClient.invalidateQueries({ queryKey: ['auth-user'] })
-                        navigate('/')
-                     }}
-                     label="Logout"
-                     icon={BiLogOut}
-                  />
+                  <SidebarItem onClick={handleLogout} label="Logout" icon={BiLogOut} />
                )}
                <SidebarTweetButton />
             </div>

@@ -1,21 +1,30 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { editUser } from '../../services'
+import { useUserStore } from '../stores'
+import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 const useEditUser = () => {
+   const { userActions } = useUserStore()
    const queryClient = useQueryClient()
 
-   const mutation = useMutation({
+   const [isLoading, setIsLoading] = useState(false)
+
+   const { mutateAsync: editCurrentUser } = useMutation({
       mutationFn: editUser,
-      onSuccess: () => {
-         queryClient.invalidateQueries({ queryKey: ['auth-user'] })
-         console.log('Usuario actualizado con éxito')
+      onMutate: () => setIsLoading(true),
+      onSettled: () => setIsLoading(false),
+      onSuccess: (data) => {
+         toast.success(data.message)
+         userActions.dispatchCurrentUser(data.user)
+         queryClient.invalidateQueries({ queryKey: ['getUserById'] })
       },
       onError: (error) => {
-         console.error('Error al actualizar el usuario:', error)
+         toast.error(error.message || 'Edit user Error')
       },
    })
 
-   return mutation
+   return { editCurrentUser, isLoading }
 }
 
 export default useEditUser

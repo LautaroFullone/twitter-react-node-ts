@@ -4,7 +4,7 @@ import { User } from '../../models'
 
 const useGetUserById = (id: User['id']) => {
    const { data, isError, isLoading } = useQuery({
-      queryKey: ['get-user-id', id],
+      queryKey: ['getUserById', id],
       queryFn: () => getUserById(id),
       staleTime: 20 * 60 * 1000, //20min
       retry: 1,

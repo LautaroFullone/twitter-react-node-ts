@@ -4,7 +4,7 @@ interface AvatarProps {
    userId: string
    isLarge?: boolean
    hasBorder?: boolean
-   imageSrc: string
+   imageSrc: string | null
 }
 
 const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder, imageSrc }) => {

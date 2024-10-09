@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FollowBar, LoginModal, RegisterModal, Sidebar } from '../components'
+import { EditModal, FollowBar, LoginModal, RegisterModal, Sidebar } from '../components'
 import { useGetCurrentUser, useUserStore } from '../hooks'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
@@ -17,8 +17,11 @@ const AppLayout = () => {
 
    return (
       <div className="h-screen bg-black">
+         <Toaster />
+
          <LoginModal />
          <RegisterModal />
+         <EditModal />
 
          <div className="container h-full mx-auto xl:px-30 max-w-6xl">
             <div className="grid grid-cols-4 h-full">
@@ -37,7 +40,6 @@ const AppLayout = () => {
                <FollowBar />
             </div>
          </div>
-         <Toaster />
       </div>
    )
 }

@@ -16,7 +16,7 @@ const AuthModal: React.FC<ModalProps> = ({ type, isLoading = false, isOpen = fal
    return (
       <>
          {isOpen && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-30">
                <div className="bg-white rounded-2xl p-8 w-full max-w-md relative">
                   <button
                      onClick={() => {

@@ -1,14 +1,18 @@
+import { useModalStore, useUserStore } from '../hooks'
 import { FaFeather } from 'react-icons/fa'
 
 const SidebarTweetButton = () => {
-   // const loginModalState = useLoginModalState()
+   const { modalActions } = useModalStore()
+   const { currentUser } = useUserStore()
 
-   // const onClick = useCallback(() => {
-   //    loginModalState.onOpen()
-   // }, [loginModalState])
+   const handleClick = () => {
+      if (!currentUser) {
+         return modalActions.openLoginModal()
+      }
+   }
 
    return (
-      <div onClick={() => {}}>
+      <div onClick={handleClick}>
          <div
             className="lg:hidden
                mt-6

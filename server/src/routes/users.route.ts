@@ -15,7 +15,7 @@ usersRouter.patch('/edit', requireAuth, async (req: UserReq, res: Response) => {
          data: { name, username, bio, profileImage, coverImage },
       })
 
-      return res.status(200).send({ user: userUpdated })
+      return res.status(200).send({ user: userUpdated, message: 'User updated' })
    } catch (error) {
       return res.status(500).send(error)
    }

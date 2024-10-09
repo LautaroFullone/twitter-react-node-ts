@@ -58,8 +58,6 @@ authRouter.post('/login', async (req: Request, res: Response) => {
 
 authRouter.get('/authenticated-user', requireAuth, async (req: UserReq, res: Response) => {
    try {
-      console.log('GET /autenticated-user: ', req?.user)
-
       return res.status(200).send({ user: req.user })
    } catch (error: any) {
       console.log('ERROR /autenticated-user: ', error)
