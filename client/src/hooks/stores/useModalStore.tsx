@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface AuthModalStoreProps {
+interface ModalStoreProps {
    isLoginModalOpen: boolean
    isRegisterModalOpen: boolean
    isEditModalOpen: boolean
@@ -15,13 +15,13 @@ interface AuthModalStoreProps {
    }
 }
 
-const INITIAL_STATE: Omit<AuthModalStoreProps, 'modalActions'> = {
+const INITIAL_STATE: Omit<ModalStoreProps, 'modalActions'> = {
    isEditModalOpen: false,
    isLoginModalOpen: false,
    isRegisterModalOpen: false,
 }
 
-const useModalStore = create<AuthModalStoreProps>((set) => ({
+const useModalStore = create<ModalStoreProps>((set) => ({
    ...INITIAL_STATE,
 
    modalActions: {
