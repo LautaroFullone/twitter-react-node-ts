@@ -9,11 +9,13 @@ import Sidebar from './Sidebar'
 import UserBio from './UserBio'
 import UserHero from './UserHero'
 import EditModal from './modals/EditModal'
+import Form from './Form'
 
 export {
    Avatar,
    Button,
    FollowBar,
+   Form,
    Input,
    LoginModal,
    RegisterModal,

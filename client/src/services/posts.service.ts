@@ -28,3 +28,13 @@ export async function getPostByUser(userId: User['id']) {
       throw new Error('Error in getPostByUser')
    }
 }
+
+// export async function getPostByUser(userId: User['id']) {
+//    type PostsRes = Pick<ResponseApi, 'posts'>
+//    try {
+//       const { data } = await apiTwitter.get<PostsRes>(`${apiURL}/posts/user/${userId}`)
+//       return data
+//    } catch {
+//       throw new Error('Error in getPostByUser')
+//    }
+// }
