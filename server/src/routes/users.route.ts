@@ -1,14 +1,13 @@
 import { Request, Response, Router } from 'express'
 import { requireAuth } from '../middlewares'
 import { UserReq } from '../middlewares/requireAuth'
-import prisma from '../prismaClient'
+import prisma from '../lib/prisma'
 
 const usersRouter = Router()
 
 usersRouter.patch('/edit', requireAuth, async (req: UserReq, res: Response) => {
    try {
       const { name, username, bio, profileImage, coverImage } = req.body
-      console.log('edit:', req.user)
 
       const userUpdated = await prisma.users.update({
          where: { id: req.user?.id },

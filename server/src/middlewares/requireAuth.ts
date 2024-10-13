@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { JwtPayload, verify, TokenExpiredError } from 'jsonwebtoken'
-import prisma from '../prismaClient'
 import { Users } from '@prisma/client'
+import prisma from '../lib/prisma'
 
 const jwtSecret = process.env.JWT_SECRET as string
 

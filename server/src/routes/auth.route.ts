@@ -2,7 +2,7 @@ import { requireAuth, UserReq } from '../middlewares/requireAuth'
 import { Request, Response, Router } from 'express'
 import { hash, compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
-import prisma from '../prismaClient'
+import prisma from '../lib/prisma'
 
 const jwtSecret = process.env.JWT_SECRET as string
 

@@ -1,7 +1,6 @@
 import { useBasicForm, useLogin, useModalStore } from '../../hooks'
 import { UserLoginForm } from '../../models'
 import AuthModal from './AuthModal'
-import { useState } from 'react'
 
 const initialFormData: UserLoginForm = {
    email: '',
@@ -11,17 +10,11 @@ const initialFormData: UserLoginForm = {
 const LoginModal = () => {
    const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
    const { modalActions, isLoginModalOpen } = useModalStore()
-   const { loginUser } = useLogin()
-
-   const [isLoading, setIsLoading] = useState(false)
+   const { loginUser, isLoading } = useLogin()
 
    async function handleSubmit(evt: React.FormEvent) {
       evt.preventDefault()
-      setIsLoading(true)
-
       await loginUser(formData)
-
-      setIsLoading(false)
       resetForm()
       modalActions.closeLoginModal()
    }

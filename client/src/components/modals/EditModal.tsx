@@ -36,18 +36,13 @@ const EditModal = () => {
 
    async function handleSubmit(e: React.FormEvent) {
       e.preventDefault()
-      console.log('# before')
       await editCurrentUser(formData)
-
-      console.log('# after')
    }
 
    function handleImageUpload(
       e: React.ChangeEvent<HTMLInputElement>,
       imageField: 'coverImage' | 'profileImage'
    ) {
-      console.log('# handleImageUpload')
-
       const file = e.target.files?.[0]
       if (file) {
          const reader = new FileReader()
@@ -59,7 +54,6 @@ const EditModal = () => {
                   value: reader.result as string,
                },
             }
-            console.log('# evt: ', evtChange)
             //workarround to re-use handleChange from useBasicForm
             handleChange(evtChange as React.ChangeEvent<HTMLInputElement>)
          }
