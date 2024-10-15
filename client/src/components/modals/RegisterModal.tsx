@@ -1,4 +1,4 @@
-import { useBasicForm, useModalStore, useRegister } from '../../hooks'
+import { useBasicForm, useModalStore, useMutationRegister } from '../../hooks'
 import { UserRegisterForm } from '../../models'
 import AuthModal from './AuthModal'
 
@@ -12,7 +12,7 @@ const initialFormData: UserRegisterForm = {
 const RegisterModal = () => {
    const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
    const { modalActions, isRegisterModalOpen } = useModalStore()
-   const { registerUser, isLoading } = useRegister()
+   const { registerUser, isLoading } = useMutationRegister()
 
    async function handleSubmit(evt: React.FormEvent) {
       evt.preventDefault()

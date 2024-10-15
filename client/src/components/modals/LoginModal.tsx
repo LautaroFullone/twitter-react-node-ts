@@ -1,4 +1,4 @@
-import { useBasicForm, useLogin, useModalStore } from '../../hooks'
+import { useBasicForm, useMutationLogin, useModalStore } from '../../hooks'
 import { UserLoginForm } from '../../models'
 import AuthModal from './AuthModal'
 
@@ -10,7 +10,7 @@ const initialFormData: UserLoginForm = {
 const LoginModal = () => {
    const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
    const { modalActions, isLoginModalOpen } = useModalStore()
-   const { loginUser, isLoading } = useLogin()
+   const { loginUser, isLoading } = useMutationLogin()
 
    async function handleSubmit(evt: React.FormEvent) {
       evt.preventDefault()
@@ -102,8 +102,8 @@ const LoginModal = () => {
 export default LoginModal
 
 // const LoginModal = () => {
-//    // const loginModalState = useLoginModalState()
-//    // const registerModalState = useRegisterModalState()
+//    // const loginModalState = useMutationLoginModalState()
+//    // const registerModalState = useMutationRegisterModalState()
 
 //    const [email, setEmail] = useState('')
 //    const [password, setPassword] = useState('')

@@ -1,21 +1,25 @@
-import useGetUserById from './api/useGetUserById'
-import useGetUsers from './api/useGetUsers'
+import useQueryUserById from './api/useQueryUserById'
+import useQueryUsers from './api/useQueryUsers'
 import useBasicForm from './useBasicForm'
 import useToken from './useToken'
-import useGetCurrentUser from './api/useGetCurrentUser'
-import useLogin from './api/useLogin'
-import useRegister from './api/useRegister'
+import useQueryCurrentUser from './api/useQueryCurrentUser'
+import useMutationLogin from './api/useMutationLogin'
+import useMutationRegister from './api/useMutationRegister'
 import useModalStore from './stores/useModalStore'
 import useUserStore from './stores/useUserStore'
+import useMutationPost from './api/useMutationPost'
+import useQueryPosts from './api/useQueryPosts'
 
 export {
    useModalStore,
    useUserStore,
-   useGetCurrentUser,
+   useQueryCurrentUser,
    useBasicForm,
-   useGetUserById,
-   useGetUsers,
+   useQueryUserById,
+   useQueryUsers,
    useToken,
-   useLogin,
-   useRegister,
+   useMutationLogin,
+   useMutationRegister,
+   useMutationPost,
+   useQueryPosts,
 }

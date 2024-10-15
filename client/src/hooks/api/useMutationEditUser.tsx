@@ -4,7 +4,7 @@ import { useUserStore } from '../stores'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
 
-const useEditUser = () => {
+const useMutationEditUser = () => {
    const { userActions } = useUserStore()
    const queryClient = useQueryClient()
 
@@ -27,4 +27,4 @@ const useEditUser = () => {
    return { editCurrentUser, isLoading }
 }
 
-export default useEditUser
+export default useMutationEditUser

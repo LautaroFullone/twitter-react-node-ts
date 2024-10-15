@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react'
 import { useUserStore, useBasicForm, useModalStore } from '../../hooks'
+import useMutationEditUser from '../../hooks/api/useMutationEditUser'
 import { UserEditForm } from '../../models/User'
-import useEditUser from '../../hooks/api/useEditUser'
 import { BiCamera, BiX } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
+import { useEffect, useRef } from 'react'
 
 const initialFormData: UserEditForm = {
    name: '',
@@ -15,7 +15,7 @@ const initialFormData: UserEditForm = {
 
 const EditModal = () => {
    const { formData, handleChange, setFormData } = useBasicForm(initialFormData)
-   const { editCurrentUser, isLoading } = useEditUser()
+   const { editCurrentUser, isLoading } = useMutationEditUser()
    const { modalActions, isEditModalOpen } = useModalStore()
    const { currentUser } = useUserStore()
 

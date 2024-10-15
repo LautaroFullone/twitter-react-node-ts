@@ -1,3 +1,5 @@
+import { User } from './User'
+
 interface Comment {
    id: string
    body: string
@@ -7,12 +9,15 @@ interface Comment {
    postId: string
 }
 
-export interface Posts {
+export interface Post {
    id: string
    body: string
    userId: string
+   user: User
    likedIds: string[]
    createdAt: string
    updatedAt: string
    comments: Comment[]
 }
+
+export type CreatePostForm = Pick<Post, 'body'>

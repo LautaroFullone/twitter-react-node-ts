@@ -1,11 +1,11 @@
-import { PageHeader, UserBio, UserHero } from '../../components'
+import { PageHeader, PostsFeed, UserBio, UserHero } from '../../components'
 import { Navigate, useParams } from 'react-router-dom'
-import { useGetUserById } from '../../hooks'
+import { useQueryUserById } from '../../hooks'
 import { ClipLoader } from 'react-spinners'
 
 const UserProfilePage = () => {
    const { userId } = useParams()
-   const { data, isLoading, isError } = useGetUserById(userId as string)
+   const { user, isLoading, isError } = useQueryUserById(userId as string)
 
    if (isLoading) {
       return (
@@ -24,12 +24,15 @@ const UserProfilePage = () => {
       return <Navigate to={'error'} />
    }
 
-   if (data?.user) {
+   if (user) {
       return (
          <>
-            <PageHeader label={data.user.name} showBackArrow />
-            <UserHero user={data.user} />
-            <UserBio user={data.user} />
+            <PageHeader label={user.name} showBackArrow />
+
+            <UserHero user={user} />
+            <UserBio user={user} />
+
+            <PostsFeed userId={user.id} />
          </>
       )
    }

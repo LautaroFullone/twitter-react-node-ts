@@ -1,8 +1,8 @@
-import { useGetUsers, useUserStore } from '../hooks'
+import { useQueryUsers, useUserStore } from '../hooks'
 import Avatar from './Avatar'
 
 const FollowBar = () => {
-   const { users, isLoading } = useGetUsers()
+   const { users, isLoading } = useQueryUsers()
    const { currentUser } = useUserStore()
 
    if (isLoading) {

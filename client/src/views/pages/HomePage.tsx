@@ -1,14 +1,13 @@
-import { Form, PageHeader } from '../../components'
-import { useUserStore } from '../../hooks'
+import { Form, PageHeader, PostsFeed } from '../../components'
 
 const HomePage = () => {
-   const { currentUser } = useUserStore()
-
    return (
       <>
          <PageHeader label="Home" />
-         <p className="text-white">Hola {currentUser?.name}</p>
+
          <Form placeholder="What´s happening?" />
+
+         <PostsFeed />
       </>
    )
 }
