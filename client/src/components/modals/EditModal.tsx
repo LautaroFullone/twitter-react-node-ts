@@ -3,7 +3,8 @@ import useMutationEditUser from '../../hooks/api/useMutationEditUser'
 import { UserEditForm } from '../../models/User'
 import { BiCamera, BiX } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
 const initialFormData: UserEditForm = {
    name: '',
@@ -17,7 +18,10 @@ const EditModal = () => {
    const { formData, handleChange, setFormData } = useBasicForm(initialFormData)
    const { editCurrentUser, isLoading } = useMutationEditUser()
    const { modalActions, isEditModalOpen } = useModalStore()
-   const { currentUser } = useUserStore()
+   const { currentUser, userActions } = useUserStore()
+   const queryClient = useQueryClient()
+
+   const [profileImageHasChange, setProfileImageHasChange] = useState(false)
 
    const coverImageInputRef = useRef<HTMLInputElement>(null)
    const profileImageInputRef = useRef<HTMLInputElement>(null)
@@ -37,6 +41,14 @@ const EditModal = () => {
    async function handleSubmit(e: React.FormEvent) {
       e.preventDefault()
       await editCurrentUser(formData)
+
+      if (profileImageHasChange) {
+         userActions.updateUserProfileImg(formData.profileImage)
+         queryClient.invalidateQueries({ queryKey: ['get-user-posts', currentUser?.id] })
+         queryClient.invalidateQueries({ queryKey: ['get-all-posts'] })
+      }
+
+      modalActions.closeEditModal()
    }
 
    function handleImageUpload(
@@ -59,6 +71,10 @@ const EditModal = () => {
          }
 
          reader.readAsDataURL(file)
+
+         if (imageField === 'profileImage') {
+            setProfileImageHasChange(true)
+         }
       }
    }
 

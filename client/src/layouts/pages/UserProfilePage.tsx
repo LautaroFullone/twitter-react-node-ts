@@ -32,7 +32,7 @@ const UserProfilePage = () => {
             <UserHero user={user} />
             <UserBio user={user} />
 
-            <PostsFeed userId={user.id} />
+            <PostsFeed userId={userId as string} />
          </>
       )
    }

@@ -8,6 +8,7 @@ interface UserStoreProps {
 
    userActions: {
       dispatchCurrentUser: (value: User | null) => void
+      updateUserProfileImg: (imgSrc: User['profileImage'] | null) => void
    }
 }
 
@@ -16,12 +17,18 @@ const INITIAL_STATE: Omit<UserStoreProps, 'userActions'> = {
 }
 
 export const useUserStore = create<UserStoreProps>()(
-   devtools((set) => ({
+   devtools((set, get) => ({
       currentUser: INITIAL_STATE.currentUser,
 
       userActions: {
          dispatchCurrentUser: (value: User | null) => {
-            set((state) => ({ currentUser: value }), false, 'dispatchCurrentUser')
+            set((_state) => ({ currentUser: value }), false, 'dispatchCurrentUser')
+         },
+         updateUserProfileImg: (imgSrc: User['profileImage'] | null) => {
+            const { currentUser: currentUserData } = get()
+            if (currentUserData) {
+               set({ currentUser: { ...currentUserData, profileImage: imgSrc } })
+            }
          },
       },
    }))

@@ -17,7 +17,7 @@ const useMutationEditUser = () => {
       onSuccess: (data) => {
          toast.success(data.message)
          userActions.dispatchCurrentUser(data.user)
-         queryClient.invalidateQueries({ queryKey: ['getUserById'] })
+         queryClient.invalidateQueries({ queryKey: ['get-user'] })
       },
       onError: (error) => {
          toast.error(error.message || 'Edit user Error')
