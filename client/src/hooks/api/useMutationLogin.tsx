@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import useToken from '../useToken'
 import { useState } from 'react'
 
-const useLogin = () => {
+const useMutationLogin = () => {
    const [isLoading, setIsLoading] = useState(false)
    const { userActions } = useUserStore()
    const { setToken } = useToken()
@@ -27,4 +27,4 @@ const useLogin = () => {
    return { loginUser, isLoading }
 }
 
-export default useLogin
+export default useMutationLogin

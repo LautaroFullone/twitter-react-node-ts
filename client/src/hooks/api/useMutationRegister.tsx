@@ -3,7 +3,7 @@ import { register } from '../../services'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
 
-const useRegister = () => {
+const useMutationRegister = () => {
    const [isLoading, setIsLoading] = useState(false)
 
    const { mutateAsync: registerUser } = useMutation({
@@ -21,4 +21,4 @@ const useRegister = () => {
    return { registerUser, isLoading }
 }
 
-export default useRegister
+export default useMutationRegister

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getUsers } from '../../services'
 
-const useGetUsers = () => {
+const useQueryUsers = () => {
    const { data, error, isLoading } = useQuery({
       queryKey: ['get-users'],
       queryFn: getUsers,
@@ -16,4 +16,4 @@ const useGetUsers = () => {
    }
 }
 
-export default useGetUsers
+export default useQueryUsers

@@ -6,7 +6,7 @@ import useToken from '../useToken'
 // Si no tenemos instancia de usuario logueado
 // y habia un token seteado
 // y la api nos devolvio correctamente el usuario conectado
-const useGetCurrentUser = () => {
+const useQueryCurrentUser = () => {
    const { currentUser } = useUserStore()
    const { getToken } = useToken()
 
@@ -28,4 +28,4 @@ const useGetCurrentUser = () => {
    return { currentUserApi: data, isError, error, isLoading }
 }
 
-export default useGetCurrentUser
+export default useQueryCurrentUser
