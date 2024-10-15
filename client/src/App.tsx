@@ -1,4 +1,4 @@
-import { AppLayout, HomePage, NotificationsPage, UserProfilePage } from './views'
+import { AppLayout, HomePage, NotificationsPage, UserProfilePage } from './layouts'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
