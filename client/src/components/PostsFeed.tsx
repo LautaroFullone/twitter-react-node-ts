@@ -1,6 +1,7 @@
 import { useQueryPosts } from '../hooks'
 import { User } from '../models'
 import PostItem from './PostItem'
+import Spinner from './Spinner'
 
 interface PostsFeedProps {
    userId?: User['id']
@@ -10,7 +11,7 @@ const PostsFeed: React.FC<PostsFeedProps> = ({ userId }) => {
    const { posts, isLoading } = useQueryPosts(userId)
 
    if (isLoading) {
-      return <div className="text-white">Loading....</div>
+      return <Spinner />
    }
 
    if (posts) {

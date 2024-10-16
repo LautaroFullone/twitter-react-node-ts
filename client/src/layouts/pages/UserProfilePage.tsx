@@ -1,23 +1,13 @@
-import { PageHeader, PostsFeed, UserBio, UserHero } from '../../components'
+import { PageHeader, PostsFeed, Spinner, UserBio, UserHero } from '../../components'
 import { Navigate, useParams } from 'react-router-dom'
 import { useQueryUserById } from '../../hooks'
-import { ClipLoader } from 'react-spinners'
 
 const UserProfilePage = () => {
    const { userId } = useParams()
    const { user, isLoading, isError } = useQueryUserById(userId as string)
 
    if (isLoading) {
-      return (
-         <div
-            className="flex
-               justify-center
-               items-center
-               h-full"
-         >
-            <ClipLoader color="lightblue" size={80} />
-         </div>
-      )
+      return <Spinner />
    }
 
    if (isError) {

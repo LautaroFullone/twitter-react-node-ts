@@ -9,6 +9,7 @@ import PostItem from './PostItem'
 import PostItemCounter from './PostItemCounter'
 import RegisterModal from './modals/RegisterModal'
 import Sidebar from './Sidebar'
+import Spinner from './Spinner'
 import UserBio from './UserBio'
 import UserHero from './UserHero'
 import EditModal from './modals/EditModal'
@@ -27,6 +28,7 @@ export {
    PostItem,
    PostItemCounter,
    Sidebar,
+   Spinner,
    UserBio,
    UserHero,
    EditModal,
