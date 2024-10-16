@@ -15,7 +15,7 @@ const PostsFeed: React.FC<PostsFeedProps> = ({ userId }) => {
    }
 
    if (posts) {
-      return posts.map((post) => <PostItem key={post.id} data={post} />)
+      return posts.map((post) => <PostItem key={post.id} post={post} />)
    }
 }
 

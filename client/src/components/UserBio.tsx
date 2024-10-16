@@ -12,8 +12,8 @@ interface UserBioProps {
 
 const UserBio: React.FC<UserBioProps> = ({ user }) => {
    const { toggleFollow, isFollowing } = useFollow(user.id)
-   const { currentUser } = useUserStore()
    const { modalActions } = useModalStore()
+   const { currentUser } = useUserStore()
 
    const createdAt = useMemo(() => {
       if (!user?.createdAt) return null

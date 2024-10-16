@@ -5,23 +5,32 @@ import { formatDistanceToNowStrict } from 'date-fns'
 import Avatar from './Avatar'
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai'
 import PostItemCounter from './PostItemCounter'
+import useLike from '../hooks/useLike'
+import { useModalStore, useUserStore } from '../hooks'
 
 interface PostItemProps {
-   data: Post
+   post: Post
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data }) => {
+const PostItem: React.FC<PostItemProps> = ({ post }) => {
+   const { toggleLike, hasLike } = useLike(post)
+   const { modalActions } = useModalStore()
+   const { currentUser } = useUserStore()
+
    const navigate = useNavigate()
 
-   const handleLike = () => {
-      console.log('# like')
+   const handleLike = async () => {
+      if (!currentUser) {
+         return modalActions.openLoginModal()
+      }
+      await toggleLike()
    }
 
    const createdAt = useMemo(() => {
-      if (!data?.createdAt) return null
+      if (!post?.createdAt) return null
 
-      return formatDistanceToNowStrict(new Date(data.createdAt))
-   }, [data])
+      return formatDistanceToNowStrict(new Date(post.createdAt))
+   }, [post])
 
    return (
       <div
@@ -32,17 +41,17 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
             transition"
       >
          <div className="flex flex-row items-start gap-3">
-            <Avatar userId={data.userId} imageSrc={data.user.profileImage} />
+            <Avatar userId={post.userId} imageSrc={post.user.profileImage} />
             <div>
                <div className="flex flex-row items-center gap-2">
                   <p
-                     onClick={() => navigate(`/profile/${data.userId}`)}
+                     onClick={() => navigate(`/profile/${post.userId}`)}
                      className="text-white 
                         cursor-pointer 
                         hover:underline 
                         font-semibold "
                   >
-                     @{data.user.name}
+                     @{post.user.name}
                   </p>
 
                   <span
@@ -52,26 +61,27 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
                         hidden 
                         md:block"
                   >
-                     @{data.user.username}
+                     @{post.user.username}
                   </span>
 
                   <span className="text-neutral-500 text-sm">{createdAt}</span>
                </div>
 
-               <div className="text-white mt-1">{data.body}</div>
+               <div className="text-white mt-1">{post.body}</div>
 
                <div className="flex flex-row items-center mt-3 gap-10">
                   <PostItemCounter
                      icon={AiOutlineMessage}
-                     value={data.comments.length || 0}
-                     hoverColor="sky"
+                     value={post.comments.length || 0}
+                     color="sky"
                   />
 
                   <PostItemCounter
                      icon={AiOutlineHeart}
-                     value={data.comments.length || 0}
-                     hoverColor="red"
+                     value={post.likedIds.length || 0}
+                     color="red"
                      onClick={handleLike}
+                     isActive={hasLike}
                   />
                </div>
             </div>

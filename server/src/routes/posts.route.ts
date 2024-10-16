@@ -56,4 +56,66 @@ postsRouter.post('/', requireAuth, async (req: UserReq, res: Response) => {
    }
 })
 
+postsRouter.post('/:postId/like', requireAuth, async (req: UserReq, res: Response) => {
+   const { postId } = req.params
+
+   try {
+      const post = await prisma.posts.findUnique({
+         where: {
+            id: postId,
+         },
+      })
+
+      if (!post) throw new Error('Post to like not found')
+
+      const actualLikeIds = post?.likedIds || []
+
+      const postUpdated = await prisma.posts.update({
+         where: { id: postId },
+         data: {
+            likedIds: [...actualLikeIds, req.user?.id!],
+         },
+      })
+
+      return res.status(200).send({
+         post: postUpdated,
+         message: `Post like ${postUpdated.id}`,
+      })
+   } catch (error) {
+      console.log('# error like post: ', error)
+      return res.status(500).send(error)
+   }
+})
+
+postsRouter.post('/:postId/dislike', requireAuth, async (req: UserReq, res: Response) => {
+   const { postId } = req.params
+
+   try {
+      const post = await prisma.posts.findUnique({
+         where: {
+            id: postId,
+         },
+      })
+
+      if (!post) throw new Error('Post to like not found')
+
+      const actualLikeIds = post?.likedIds || []
+
+      const postUpdated = await prisma.posts.update({
+         where: { id: postId },
+         data: {
+            likedIds: [...actualLikeIds].filter((likeId) => likeId !== req.user?.id!),
+         },
+      })
+
+      return res.status(200).send({
+         post: postUpdated,
+         message: `Post dislike ${postUpdated.id}`,
+      })
+   } catch (error) {
+      console.log('# error dislike post: ', error)
+      return res.status(500).send(error)
+   }
+})
+
 export default postsRouter

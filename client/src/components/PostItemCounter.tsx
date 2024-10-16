@@ -3,7 +3,8 @@ import { IconType } from 'react-icons'
 interface PostItemCounterProps {
    value: number
    icon: IconType
-   hoverColor: 'red' | 'sky'
+   color: 'red' | 'sky'
+   isActive?: boolean
    onClick?: () => void
 }
 
@@ -11,7 +12,8 @@ const PostItemCounter: React.FC<PostItemCounterProps> = ({
    icon: Icon,
    onClick,
    value,
-   hoverColor,
+   color,
+   isActive,
 }) => {
    return (
       <div
@@ -23,8 +25,8 @@ const PostItemCounter: React.FC<PostItemCounterProps> = ({
             gap-2 
             cursor-pointer 
             transition 
-            ${hoverColor === 'red' ? 'hover:text-red-500' : ''}
-            ${hoverColor === 'sky' ? 'hover:text-sky-500' : ''}
+            hover:text-${color}-500
+            ${isActive ? `text-${color}-500` : 'text-neutral-50'}
          `}
       >
          <Icon size={20} />

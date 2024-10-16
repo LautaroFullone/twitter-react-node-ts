@@ -6,19 +6,21 @@ import useMutationFollowers from './api/useMutationFollowers'
 const useFollow = (userId: User['id']) => {
    const { currentUser } = useUserStore()
 
-   const isFollowing = useMemo(() => {
+   const isCurrentUserFollowing = useMemo(() => {
       const usersFollowByCurrent = currentUser?.followingIds || []
 
       return usersFollowByCurrent.includes(userId)
    }, [currentUser?.followingIds, userId])
 
-   const { toggleFollowing, isLoading } = useMutationFollowers(isFollowing ? 'unfollow' : 'follow')
+   const { toggleFollowing, isLoading } = useMutationFollowers(
+      isCurrentUserFollowing ? 'unfollow' : 'follow'
+   )
 
    const toggleFollow = async () => {
       await toggleFollowing(userId)
    }
 
-   return { toggleFollow, isFollowing, isLoading }
+   return { toggleFollow, isFollowing: isCurrentUserFollowing, isLoading }
 }
 
 export default useFollow

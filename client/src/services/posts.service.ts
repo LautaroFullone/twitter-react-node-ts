@@ -41,12 +41,22 @@ export async function createPost(postData: CreatePostForm) {
    }
 }
 
-// export async function getPostByUser(userId: User['id']) {
-//    type PostsRes = Pick<ResponseApi, 'posts'>
-//    try {
-//       const { data } = await apiTwitter.get<PostsRes>(`${apiURL}/posts/user/${userId}`)
-//       return data
-//    } catch {
-//       throw new Error('Error in getPostByUser')
-//    }
-// }
+export async function likePost(postId: Post['id']) {
+   type UsersRes = Pick<ResponseApi, 'post' | 'message'>
+   try {
+      const { data } = await apiTwitter.post<UsersRes>(`${apiURL}/posts/${postId}/like`)
+      return data
+   } catch {
+      throw new Error('Error in likePost')
+   }
+}
+
+export async function dislikePost(postId: Post['id']) {
+   type UsersRes = Pick<ResponseApi, 'post' | 'message'>
+   try {
+      const { data } = await apiTwitter.post<UsersRes>(`${apiURL}/posts/${postId}/dislike`)
+      return data
+   } catch {
+      throw new Error('Error in dislikePost')
+   }
+}
