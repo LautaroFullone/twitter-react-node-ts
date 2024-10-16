@@ -1,5 +1,6 @@
 import { useUserStore, useModalStore } from '../hooks'
 import { BiCalendar } from 'react-icons/bi'
+import useFollow from '../hooks/useFollow'
 import { format } from 'date-fns'
 import { User } from '../models'
 import { useMemo } from 'react'
@@ -10,6 +11,7 @@ interface UserBioProps {
 }
 
 const UserBio: React.FC<UserBioProps> = ({ user }) => {
+   const { toggleFollow, isFollowing } = useFollow(user.id)
    const { currentUser } = useUserStore()
    const { modalActions } = useModalStore()
 
@@ -19,18 +21,23 @@ const UserBio: React.FC<UserBioProps> = ({ user }) => {
       return format(new Date(user.createdAt), 'MMMM yyyy')
    }, [user])
 
+   const handleFollow = async () => {
+      if (!currentUser) {
+         return modalActions.openLoginModal()
+      }
+      await toggleFollow()
+   }
+
    return (
       <div className="border-b-[1px] border-neutral-800 pb-4">
          <div className="flex justify-end p-2">
             {currentUser?.id === user.id ? (
-               <Button label="Edit" secondary onClick={() => modalActions.openEditModal()} />
+               <Button label="Edit" onClick={() => modalActions.openEditModal()} secondary />
             ) : (
                <Button
-                  label="Follow"
+                  label={`${isFollowing ? 'Unfollow' : 'Follow'}`}
+                  onClick={handleFollow}
                   secondary
-                  onClick={() => {
-                     if (!currentUser) return modalActions.openLoginModal()
-                  }}
                />
             )}
          </div>
@@ -57,7 +64,7 @@ const UserBio: React.FC<UserBioProps> = ({ user }) => {
                </div>
                <div className="flex flex-row items-center gap-1">
                   <p className="text-white">{user.followersCount || 0}</p>
-                  <p className="text-neutral-500">Following</p>
+                  <p className="text-neutral-500">Followers</p>
                </div>
             </div>
          </div>

@@ -14,7 +14,7 @@ const useMutationRegister = () => {
          toast.success(data.message)
       },
       onError: (error) => {
-         toast.error(error.message || 'Register Error')
+         toast.error(error.message || 'Register error')
       },
    })
 

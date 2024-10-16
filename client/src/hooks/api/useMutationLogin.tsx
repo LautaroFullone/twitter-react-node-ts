@@ -20,7 +20,7 @@ const useMutationLogin = () => {
          toast.success(data.message)
       },
       onError: (error) => {
-         toast.error(error.message || 'Login Error')
+         toast.error(error.message || 'Login error')
       },
    })
 
