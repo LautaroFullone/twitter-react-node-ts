@@ -1,6 +1,6 @@
 import { User } from './User'
 
-interface Comment {
+export interface Comment {
    id: string
    body: string
    createdAt: string
@@ -8,6 +8,8 @@ interface Comment {
    userId: string
    postId: string
 }
+
+export type CreateCommentForm = Pick<Comment, 'body'>
 
 export interface Post {
    id: string

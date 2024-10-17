@@ -1,12 +1,13 @@
-import { CreatePostForm, Post } from '../models/Post'
+import { Comment, CreatePostForm, Post, CreateCommentForm } from '../models/Post'
 import { apiTwitter } from '../lib/axios'
-import { User } from '../models'
+import { User } from '../models/User'
 
 const apiURL = 'http://localhost:3040'
 
 interface ResponseApi {
    post: Post
    posts: Post[]
+   comment: Comment
    message: string
 }
 
@@ -58,5 +59,24 @@ export async function dislikePost(postId: Post['id']) {
       return data
    } catch {
       throw new Error('Error in dislikePost')
+   }
+}
+
+export async function commentPost({
+   postId,
+   commentBody,
+}: {
+   postId: Post['id']
+   commentBody: CreateCommentForm
+}) {
+   type UsersRes = Pick<ResponseApi, 'comment' | 'message'>
+   try {
+      const { data } = await apiTwitter.post<UsersRes>(
+         `${apiURL}/posts/${postId}/comment`,
+         commentBody
+      )
+      return data
+   } catch {
+      throw new Error('Error in commentPost')
    }
 }

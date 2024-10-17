@@ -3,6 +3,7 @@ import useQueryUsers from './api/useQueryUsers'
 import useBasicForm from './useBasicForm'
 import useToken from './useToken'
 import useQueryCurrentUser from './api/useQueryCurrentUser'
+import useMutationComment from './api/useMutationComment'
 import useMutationLogin from './api/useMutationLogin'
 import useMutationRegister from './api/useMutationRegister'
 import useModalStore from './stores/useModalStore'
@@ -18,6 +19,7 @@ export {
    useQueryUserById,
    useQueryUsers,
    useToken,
+   useMutationComment,
    useMutationLogin,
    useMutationRegister,
    useMutationPost,

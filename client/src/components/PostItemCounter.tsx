@@ -26,7 +26,7 @@ const PostItemCounter: React.FC<PostItemCounterProps> = ({
             cursor-pointer 
             transition 
             hover:text-${color}-500
-            ${isActive ? `text-${color}-500` : 'text-neutral-50'}
+            ${isActive ? `text-${color}-500` : ''}
          `}
       >
          <Icon size={20} />

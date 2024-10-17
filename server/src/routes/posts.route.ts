@@ -118,4 +118,50 @@ postsRouter.post('/:postId/dislike', requireAuth, async (req: UserReq, res: Resp
    }
 })
 
+postsRouter.post('/:postId/comment', requireAuth, async (req: UserReq, res: Response) => {
+   const { postId } = req.params
+
+   try {
+      const newComment = await prisma.comments.create({
+         data: {
+            ...req.body,
+            userId: req.user?.id,
+            postId,
+         },
+      })
+
+      return res.status(200).send({
+         comment: newComment,
+         message: `Comment created`,
+      })
+   } catch (error) {
+      console.log('# error comment: ', error)
+      return res.status(500).send(error)
+   }
+})
+
+// postsRouter.delete(
+//    '/:postId/comment/:commentId',
+//    requireAuth,
+//    async (req: UserReq, res: Response) => {
+//       const { postId, commentId } = req.params
+
+//       try {
+//          const commentToDelete = await prisma.units.findUnique({
+//             where: { id: unitID },
+//         });
+
+//         if (!unitToDelete) throw new NotFound("Unidad");
+
+//          return res.status(200).send({
+//             comment: newComment,
+//             message: `Comment created`,
+//          })
+//       } catch (error) {
+//          console.log('# error comment: ', error)
+//          return res.status(500).send(error)
+//       }
+//    }
+// )
+
 export default postsRouter

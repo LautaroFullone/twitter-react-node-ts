@@ -1,4 +1,4 @@
-import { AppLayout, HomePage, NotificationsPage, UserProfilePage } from './layouts'
+import { AppLayout, HomePage, NotificationsPage, PostDetailsPage, UserProfilePage } from './layouts'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
                <Route path="/" element={<HomePage />} index />
                <Route path="/notifications" element={<NotificationsPage />} />
                <Route path="/profile/:userId" element={<UserProfilePage />} />
+               <Route path="/post/:postId" element={<PostDetailsPage />} />
             </Route>
          </Routes>
       </BrowserRouter>

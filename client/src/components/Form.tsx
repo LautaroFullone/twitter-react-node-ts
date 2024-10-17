@@ -1,5 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { useBasicForm, useModalStore, useMutationPost, useUserStore } from '../hooks'
+import {
+   useBasicForm,
+   useModalStore,
+   useMutationComment,
+   useMutationPost,
+   useUserStore,
+} from '../hooks'
 import { CreatePostForm } from '../models'
 import Avatar from './Avatar'
 import Button from './Button'
@@ -15,14 +21,20 @@ const initialFormData: CreatePostForm = {
 }
 
 const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
+   const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
    const { modalActions } = useModalStore()
    const { currentUser } = useUserStore()
-   const { createNewPost, isLoading } = useMutationPost()
-   const { formData, handleChange, resetForm } = useBasicForm(initialFormData)
    const queryClient = useQueryClient()
 
+   const { createNewPost, isLoading: isPostLoading } = useMutationPost()
+   const { comment, isLoading: isCommentLoading } = useMutationComment()
+
    async function handleTweet() {
-      await createNewPost(formData)
+      if (isComment && postId) {
+         await comment({ postId, commentBody: { body: formData.body } })
+      } else {
+         await createNewPost(formData)
+      }
 
       resetForm()
       queryClient.invalidateQueries({ queryKey: ['get-all-posts'] })
@@ -41,7 +53,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                   <textarea
                      name="body"
                      value={formData.body}
-                     disabled={isLoading}
+                     disabled={isCommentLoading || isPostLoading}
                      onChange={handleChange}
                      className="peer
                            resize-none
@@ -70,7 +82,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                      <Button
                         label="Tweet"
                         onClick={handleTweet}
-                        disabled={isLoading || !formData.body}
+                        disabled={isCommentLoading || isPostLoading || !formData.body}
                      />
                   </div>
                </div>
