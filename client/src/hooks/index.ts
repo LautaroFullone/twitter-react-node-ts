@@ -12,6 +12,7 @@ import useMutationPost from './api/useMutationPost'
 import useQueryPosts from './api/useQueryPosts'
 import useQueryPostById from './api/useQueryPostById'
 import useAuthNavigation from './useAuthNavigation'
+import useQueryNotifications from './api/useQueryNotifications'
 
 export {
    useModalStore,
@@ -28,4 +29,5 @@ export {
    useQueryPosts,
    useQueryPostById,
    useAuthNavigation,
+   useQueryNotifications,
 }

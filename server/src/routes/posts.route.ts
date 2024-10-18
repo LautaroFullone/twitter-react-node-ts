@@ -105,6 +105,15 @@ postsRouter.post('/:postId/like', requireAuth, async (req: UserReq, res: Respons
          },
       })
 
+      if (req.user?.id !== post.userId) {
+         await prisma.notifications.create({
+            data: {
+               body: `${req.user?.username} liked your tweet`,
+               userId: post.userId,
+            },
+         })
+      }
+
       return res.status(200).send({
          post: postUpdated,
          message: `Post like ${postUpdated.id}`,

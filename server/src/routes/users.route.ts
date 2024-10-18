@@ -79,6 +79,13 @@ usersRouter.post('/follow/:userId', requireAuth, async (req: UserReq, res: Respo
          data: { followingIds: [...actualFollowingIds, userId] },
       })
 
+      await prisma.notifications.create({
+         data: {
+            body: `${req.user?.username} is now following you`,
+            userId: userToFollow.id,
+         },
+      })
+
       return res.status(200).send({
          user: userUpdated,
          idUserProfile: userToFollow.id,
@@ -120,6 +127,32 @@ usersRouter.post('/unfollow/:userId', requireAuth, async (req: UserReq, res: Res
       })
    } catch (error) {
       console.log('# error unfollowUser: ', error)
+      return res.status(500).send(error)
+   }
+})
+
+usersRouter.get('/:userId/notifications', async (req: Request, res: Response) => {
+   const { userId } = req.params
+
+   try {
+      const notifications = await prisma.notifications.findMany({
+         where: {
+            userId: userId,
+         },
+         orderBy: {
+            createdAt: 'desc',
+         },
+      })
+
+      await prisma.users.update({
+         where: { id: userId },
+         data: {
+            hasNotification: false,
+         },
+      })
+
+      return res.status(200).send({ notifications })
+   } catch (error) {
       return res.status(500).send(error)
    }
 })

@@ -1,6 +1,6 @@
-import { useUserStore, useModalStore } from '../hooks'
+import { BsDot } from 'react-icons/bs'
+import { useUserStore, useModalStore, useAuthNavigation } from '../hooks'
 import { SidebarAction } from '../models/Sidebar'
-import { useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
 
 const SidebarItem: React.FC<SidebarAction> = ({
@@ -9,9 +9,10 @@ const SidebarItem: React.FC<SidebarAction> = ({
    href,
    onClick,
    authRequired = false,
+   alert,
 }) => {
    const { modalActions } = useModalStore()
-   const navigate = useNavigate()
+   const navigate = useAuthNavigation()
 
    const { currentUser } = useUserStore()
 
@@ -43,6 +44,7 @@ const SidebarItem: React.FC<SidebarAction> = ({
                lg:hidden"
          >
             <Icon size={28} color="white" />
+            {alert && <BsDot className="text-sky-500 absolute -top-4 left-4" size={60} />}
          </div>
 
          <div
@@ -59,6 +61,7 @@ const SidebarItem: React.FC<SidebarAction> = ({
          >
             <Icon size={24} color="white" />
             <p className="hidden lg:block text-white text-xl">{label}</p>
+            {alert && <BsDot className="text-sky-500 absolute -top-4 left-4" size={60} />}
          </div>
       </div>
    )

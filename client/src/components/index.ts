@@ -15,6 +15,7 @@ import UserHero from './UserHero'
 import EditModal from './modals/EditModal'
 import Form from './Form'
 import CommentItem from './CommentItem'
+import NotificationItem from './NotificationItem'
 
 export {
    Avatar,
@@ -34,4 +35,5 @@ export {
    UserHero,
    EditModal,
    CommentItem,
+   NotificationItem,
 }

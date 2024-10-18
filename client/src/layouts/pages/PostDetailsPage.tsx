@@ -24,7 +24,7 @@ const PostDetailsPage = () => {
             <Form placeholder="Tweet your reply" postId={postId as string} isComment />
 
             {post.comments.map((comment) => (
-               <CommentItem comment={comment} />
+               <CommentItem key={comment.id} comment={comment} />
             ))}
          </>
       )

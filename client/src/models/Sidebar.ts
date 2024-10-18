@@ -6,4 +6,5 @@ export interface SidebarAction {
    href?: string
    onClick?: () => void
    authRequired?: boolean
+   alert?: boolean
 }

@@ -27,6 +27,7 @@ const Sidebar = () => {
             href: '/notifications',
             icon: BsBellFill,
             authRequired: true,
+            alert: currentUser?.hasNotification, //TODO: no muestra alert cuando hay notificaciones
          },
          {
             label: 'Profile',
@@ -35,7 +36,7 @@ const Sidebar = () => {
             authRequired: true,
          },
       ],
-      [currentUser?.id]
+      [currentUser]
    )
 
    const handleLogout = () => {
@@ -67,13 +68,7 @@ const Sidebar = () => {
                </div>
 
                {itemActions.map((item) => (
-                  <SidebarItem
-                     key={item.href}
-                     href={item.href}
-                     label={item.label}
-                     icon={item.icon}
-                     authRequired={item.authRequired}
-                  />
+                  <SidebarItem key={item.href} {...item} />
                ))}
 
                {currentUser && (

@@ -1,4 +1,4 @@
-import { User, UserEditForm } from '../models'
+import { Notification, User, UserEditForm } from '../models'
 import { apiTwitter } from '../lib/axios'
 
 const apiURL = 'http://localhost:3040'
@@ -7,6 +7,7 @@ interface ResponseApi {
    user: User & { followersCount: number }
    users: User[]
    idUserProfile: User['id']
+   notifications: Notification[]
    message: string
 }
 
@@ -57,5 +58,15 @@ export async function unfollowUser(idToUnfollow: User['id']) {
       return data
    } catch {
       throw new Error('Error in unfollowUser')
+   }
+}
+
+export async function getUserNotifications(userId: User['id']) {
+   type UsersRes = Pick<ResponseApi, 'notifications'>
+   try {
+      const { data } = await apiTwitter.get<UsersRes>(`${apiURL}/users/${userId}/notifications`)
+      return data
+   } catch {
+      throw new Error('Error in getUserNotifications')
    }
 }

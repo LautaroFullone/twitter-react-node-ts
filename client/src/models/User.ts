@@ -1,3 +1,11 @@
+export interface Notification {
+   id: string
+   body: string
+   createdAt: string
+   updatedAt: string
+   userId: string
+}
+
 export interface User {
    id: string
    name: string
