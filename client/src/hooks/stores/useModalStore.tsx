@@ -21,7 +21,7 @@ const INITIAL_STATE: Omit<ModalStoreProps, 'modalActions'> = {
    isRegisterModalOpen: false,
 }
 
-const useModalStore = create<ModalStoreProps>((set) => ({
+export const useModalStore = create<ModalStoreProps>((set) => ({
    ...INITIAL_STATE,
 
    modalActions: {

@@ -11,7 +11,7 @@ const UserProfilePage = () => {
    }
 
    if (isError) {
-      return <Navigate to={'error'} />
+      return <Navigate to={'/error'} />
    }
 
    if (user) {
