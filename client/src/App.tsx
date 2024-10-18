@@ -1,4 +1,11 @@
-import { AppLayout, HomePage, NotificationsPage, PostDetailsPage, UserProfilePage } from './layouts'
+import {
+   AppLayout,
+   ErrorPage,
+   HomePage,
+   NotificationsPage,
+   PostDetailsPage,
+   UserProfilePage,
+} from './layouts'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -11,6 +18,7 @@ function App() {
                <Route path="/profile/:userId" element={<UserProfilePage />} />
                <Route path="/post/:postId" element={<PostDetailsPage />} />
             </Route>
+            <Route path="/error" element={<ErrorPage />} />
          </Routes>
       </BrowserRouter>
    )
