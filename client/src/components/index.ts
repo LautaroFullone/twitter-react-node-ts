@@ -14,6 +14,7 @@ import UserBio from './UserBio'
 import UserHero from './UserHero'
 import EditModal from './modals/EditModal'
 import Form from './Form'
+import CommentItem from './CommentItem'
 
 export {
    Avatar,
@@ -32,4 +33,5 @@ export {
    UserBio,
    UserHero,
    EditModal,
+   CommentItem,
 }

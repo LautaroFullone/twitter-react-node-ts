@@ -1,28 +1,31 @@
-import { PageHeader, PostsFeed, Spinner, UserBio, UserHero } from '../../components'
+import { CommentItem, Form, PageHeader, PostItem, Spinner } from '../../components'
 import { Navigate, useParams } from 'react-router-dom'
-import { useQueryUserById } from '../../hooks'
+import { useQueryPostById } from '../../hooks'
 
 const PostDetailsPage = () => {
    const { postId } = useParams()
-   const { user, isLoading, isError } = useQueryUserById(userId as string)
+   const { post, isLoading, isError } = useQueryPostById(postId as string)
 
    if (isLoading) {
       return <Spinner />
    }
 
    if (isError) {
-      return <Navigate to={'error'} />
+      return <Navigate to={'/error'} />
    }
 
-   if (user) {
+   if (post) {
       return (
          <>
-            <PageHeader label={user.name} showBackArrow />
+            <PageHeader label="hola" showBackArrow />
 
-            <UserHero user={user} />
-            <UserBio user={user} />
+            <PostItem key={post.id} post={post} />
 
-            <PostsFeed userId={userId as string} />
+            <Form placeholder="Tweet your reply" postId={postId as string} isComment />
+
+            {post.comments.map((comment) => (
+               <CommentItem comment={comment} />
+            ))}
          </>
       )
    }

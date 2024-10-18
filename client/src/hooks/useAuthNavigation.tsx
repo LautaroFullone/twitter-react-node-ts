@@ -7,8 +7,8 @@ const useAuthNavigation = () => {
 
    const navigate = useNavigate()
 
-   const navigateAuth = (path: string) => {
-      if (!currentUser) {
+   const navigateAuth = (path: string, authRequired?: boolean) => {
+      if (!currentUser && authRequired) {
          modalActions.openLoginModal()
       } else {
          navigate(path)

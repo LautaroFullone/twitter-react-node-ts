@@ -7,6 +7,7 @@ export interface Comment {
    updatedAt: string
    userId: string
    postId: string
+   user?: User
 }
 
 export type CreateCommentForm = Pick<Comment, 'body'>

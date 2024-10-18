@@ -1,5 +1,5 @@
 import { BsBellFill, BsHouseFill } from 'react-icons/bs'
-//import { useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import SidebarTweetButton from './SidebarTweetButton'
 import { SidebarAction } from '../models/Sidebar'
 import { useUserStore, useToken } from '../hooks'
@@ -13,7 +13,7 @@ const Sidebar = () => {
    const navigate = useNavigate()
    const { currentUser, userActions } = useUserStore()
    const { removeToken } = useToken()
-   //const queryClient = useQueryClient()
+   const queryClient = useQueryClient()
 
    const itemActions: SidebarAction[] = useMemo(
       () => [
@@ -41,7 +41,7 @@ const Sidebar = () => {
    const handleLogout = () => {
       removeToken()
       userActions.dispatchCurrentUser(null)
-      //queryClient.invalidateQueries({ queryKey: ['auth-user'] })
+      queryClient.invalidateQueries({ queryKey: ['auth-user'] })
       navigate('/')
    }
 

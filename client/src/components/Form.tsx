@@ -32,6 +32,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
    async function handleTweet() {
       if (isComment && postId) {
          await comment({ postId, commentBody: { body: formData.body } })
+         queryClient.invalidateQueries({ queryKey: ['get-post', postId] })
       } else {
          await createNewPost(formData)
       }

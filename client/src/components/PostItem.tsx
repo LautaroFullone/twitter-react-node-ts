@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { Post } from '../models'
 import { useMemo } from 'react'
 import { formatDistanceToNowStrict } from 'date-fns'
@@ -6,7 +5,7 @@ import Avatar from './Avatar'
 import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai'
 import PostItemCounter from './PostItemCounter'
 import useLike from '../hooks/useLike'
-import { useModalStore, useUserStore } from '../hooks'
+import { useAuthNavigation, useModalStore, useUserStore } from '../hooks'
 
 interface PostItemProps {
    post: Post
@@ -16,8 +15,7 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
    const { toggleLike, hasLike } = useLike(post)
    const { modalActions } = useModalStore()
    const { currentUser } = useUserStore()
-
-   const navigate = useNavigate()
+   const navigate = useAuthNavigation()
 
    const handleLike = async () => {
       if (!currentUser) {
@@ -34,6 +32,7 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
 
    return (
       <div
+         onClick={() => navigate(`/post/${post.id}`)}
          className="border-b-[1px] 
             border-neutral-800 
             p-5 
