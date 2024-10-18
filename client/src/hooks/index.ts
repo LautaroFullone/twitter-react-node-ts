@@ -10,6 +10,8 @@ import useModalStore from './stores/useModalStore'
 import useUserStore from './stores/useUserStore'
 import useMutationPost from './api/useMutationPost'
 import useQueryPosts from './api/useQueryPosts'
+import useQueryPostById from './api/useQueryPostById'
+import useAuthNavigation from './useAuthNavigation'
 
 export {
    useModalStore,
@@ -24,4 +26,6 @@ export {
    useMutationRegister,
    useMutationPost,
    useQueryPosts,
+   useQueryPostById,
+   useAuthNavigation,
 }
