@@ -22,6 +22,34 @@ postsRouter.get('/', async (req: Request, res: Response) => {
    }
 })
 
+postsRouter.get('/:postId', async (req: Request, res: Response) => {
+   const { postId } = req.params
+
+   try {
+      const post = await prisma.posts.findUnique({
+         where: {
+            id: postId,
+         },
+         include: {
+            user: true,
+            comments: {
+               include: {
+                  user: true,
+               },
+               orderBy: {
+                  createdAt: 'desc',
+               },
+            },
+         },
+      })
+
+      return res.status(200).send({ post: post })
+   } catch (error) {
+      console.log('# error get post: ', error)
+      return res.status(500).send(error)
+   }
+})
+
 postsRouter.get('/user/:userId', async (req: Request, res: Response) => {
    const { userId } = req.params
 

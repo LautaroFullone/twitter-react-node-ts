@@ -2,6 +2,7 @@ import { login, register, authenticatedUser } from './auth.service'
 import { getUserById, getUsers, editUser, followUser, unfollowUser } from './users.service'
 import {
    getPosts,
+   getPostById,
    getPostByUser,
    createPost,
    likePost,
@@ -17,6 +18,7 @@ export {
    getUsers,
    editUser,
    getPosts,
+   getPostById,
    getPostByUser,
    createPost,
    followUser,

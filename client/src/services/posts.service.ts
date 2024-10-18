@@ -21,6 +21,16 @@ export async function getPosts() {
    }
 }
 
+export async function getPostById(postId: Post['id']) {
+   type PostsRes = Pick<ResponseApi, 'post'>
+   try {
+      const { data } = await apiTwitter.get<PostsRes>(`${apiURL}/posts/${postId}`)
+      return data
+   } catch {
+      throw new Error('Error in getPostById')
+   }
+}
+
 export async function getPostByUser(userId: User['id']) {
    type PostsRes = Pick<ResponseApi, 'posts'>
    try {
