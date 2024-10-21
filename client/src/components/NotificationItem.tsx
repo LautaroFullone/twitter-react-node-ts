@@ -11,7 +11,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification }) => 
          className="flex
             flex-row
             items-center
-            P-6
+            p-6
             gap-4
             border-b-[1px]
           border-neutral-800"

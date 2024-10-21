@@ -15,6 +15,7 @@ const useMutationLikes = (action: 'like' | 'dislike') => {
       onSuccess: (data) => {
          toast.success(data.message)
          queryClient.invalidateQueries({ queryKey: ['get-all-posts'] })
+         queryClient.invalidateQueries({ queryKey: ['get-post', data.post.id] })
          queryClient.invalidateQueries({ queryKey: ['get-user-posts', data.post.userId] })
       },
       onError: (error) => {
